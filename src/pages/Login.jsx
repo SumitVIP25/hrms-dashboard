@@ -1,4 +1,5 @@
 import { useState } from "react";
+import InputField from "../components/inputField";
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -15,10 +16,9 @@ export default function Login() {
                 <p className="text-center mb-2">Welcome back! Please login.</p>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
-                        <label>Email</label>
-                        <input
+                        <InputField
+                            label="Email"
                             type="email"
-                            className="form-control"
                             placeholder="Enter email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -26,10 +26,9 @@ export default function Login() {
                     </div>
 
                     <div className="mb-3">
-                        <label>Password</label>
-                        <input
+                        <InputField
+                            label="Password"
                             type={showPassword ? "text" : "password"}
-                            className="form-control"
                             placeholder="Enter password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
