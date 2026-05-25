@@ -1,26 +1,29 @@
 import MainLayout from "../layout/MainLayout";
+import { useEffect, useState } from "react";
 
 export default function Employees() {
-    const employees = [
-        {
-            id: 1,
-            name: "Rahul Sharma",
-            email: "rahul@test.com",
-            department: "HR",
-        },
-        {
-            id: 2,
-            name: "Amit Kumar",
-            email: "amit@test.com",
-            department: "IT"
-        },
-        {
-            id: 3,
-            name: "Priya Singh",
-            email: "priya@test.com",
-            department: "Finance",
-        },
-    ];
+
+    const [employees, setEmployees] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const fetchEmployees = async () => {
+        try {
+            const response = await fetch("https://jsonplaceholder.typicode.com/users");
+            const data = await response.json();
+            setEmployees(data);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchEmployees();
+    }, []);
+
+    if (loading) {
+        return <h2>Loading...</h2>;
+    }
+
     return (
         <MainLayout>
             <div>
