@@ -7,6 +7,11 @@ export default function Employees() {
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
 
+    const handelDelete = (id) => {
+        const updatedEmployees = employees.filter((employee) => employee.id !== id);
+        setEmployees(updatedEmployees);
+    }
+
     const filteredEmployees = employees.filter((employee) => employee.name.toLowerCase().includes(search.toLowerCase()));
 
     const fetchEmployees = async () => {
@@ -56,6 +61,7 @@ export default function Employees() {
                                 <td>{employee.name}</td>
                                 <td>{employee.email}</td>
                                 <td>{employee.department}</td>
+                                <td><button className="btn btn-danger btn-sm" onClick={() => handelDelete(employee.id)}>Delete</button></td>
                             </tr>
                         ))}
                     </tbody>
