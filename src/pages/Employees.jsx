@@ -5,6 +5,9 @@ export default function Employees() {
 
     const [employees, setEmployees] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [search, setSearch] = useState("");
+
+    const filteredEmployees = employees.filter((employee) => employee.name.toLowerCase().includes(search.toLowerCase()));
 
     const fetchEmployees = async () => {
         try {
@@ -28,6 +31,15 @@ export default function Employees() {
         <MainLayout>
             <div>
                 <h3 className="mb-4">Employees List</h3>
+                <div className="mb-3">
+                    <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Search employee..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
+                </div>
                 <table className="table">
                     <thead>
                         <tr>
@@ -38,7 +50,7 @@ export default function Employees() {
                         </tr>
                     </thead>
                     <tbody>
-                        {employees.map((employee) => (
+                        {filteredEmployees.map((employee) => (
                             <tr key={employee.id}>
                                 <td>{employee.id}</td>
                                 <td>{employee.name}</td>
