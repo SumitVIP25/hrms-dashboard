@@ -3,15 +3,27 @@ import { useEffect, useState } from "react";
 
 export default function Employees() {
 
-    const [employees, setEmployees] = useState([]);
+    const [employees, setEmployees] = useState(() => {
+        const storedEmployees = localStorage.getItem("employees");
+        return storedEmployees ? JSON.parse(storedEmployees) : [];
+    });
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [editId, setEditId] = useState(null);
 
+    const handleCancelEdit = () => {
+        setName("");
+        setEmail("");
+        setEditId(null);
+    }
 
     const handleDelete = (id) => {
+        const isConfirmed = window.confirm("Are you sure you want to delete this employee?");
+        if (!isConfirmed) {
+            return;
+        }
         const updatedEmployees = employees.filter((employee) => employee.id !== id);
         setEmployees(updatedEmployees);
     }
@@ -40,9 +52,7 @@ export default function Employees() {
     }, []);
 
     useEffect(() => {
-        if (employees.length > 0) {
-            localStorage.setItem("employees", JSON.stringify(employees));
-        }
+        localStorage.setItem("employees", JSON.stringify(employees));
     }, [employees]);
 
     if (loading) {
@@ -93,6 +103,7 @@ export default function Employees() {
                 <h3 className="mb-4">Employees List</h3>
 
                 <div className="card p-3 mb-4">
+                    <h6>Total Employees: {employees.length}</h6>
                     <h4>Add Employee</h4>
                     <div className="row g-3">
                         <div className="col-md-5">
@@ -119,6 +130,13 @@ export default function Employees() {
                                 onClick={handleAddEmployee}>
                                 {editId !== null ? "Update" : "Add"}
                             </button>
+
+                            {editId !== null && (
+                                <button
+                                    className="btn btn-secondary w-100 mt-2"
+                                    onClick={handleCancelEdit}>Cancel Edit
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -142,18 +160,26 @@ export default function Employees() {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredEmployees.map((employee) => (
-                            <tr key={employee.id}>
-                                <td>{employee.id}</td>
-                                <td>{employee.name}</td>
-                                <td>{employee.email}</td>
-                                <td><button className="btn btn-sm btn-warning me-2"
-                                    onClick={() => handleEdit(employee)}>Edit</button>
+                        {filteredEmployees.length > 0 ? (
+                            filteredEmployees.map((employee) => (
+                                <tr key={employee.id}>
+                                    <td>{employee.id}</td>
+                                    <td>{employee.name}</td>
+                                    <td>{employee.email}</td>
+                                    <td><button className="btn btn-sm btn-warning me-2"
+                                        onClick={() => handleEdit(employee)}>Edit</button>
 
-                                    <button className="btn btn-danger btn-sm"
-                                        onClick={() => handleDelete(employee.id)}>Delete</button></td>
+                                        <button className="btn btn-danger btn-sm"
+                                            onClick={() => handleDelete(employee.id)}>Delete</button></td>
+                                </tr>
+                            ))) : (
+                            <tr>
+                                <td
+                                    colSpan="4"
+                                    className="text-center text-muted">No employees found.
+                                </td>
                             </tr>
-                        ))}
+                        )}
                     </tbody>
                 </table>
             </div>
