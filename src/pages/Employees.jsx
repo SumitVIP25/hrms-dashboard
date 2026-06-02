@@ -12,11 +12,22 @@ export default function Employees() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [editId, setEditId] = useState(null);
+    const [selectedEmployee, setSelectedEmployee] = useState(null);
+
+    const handleView = (employee) => {
+        console.log(employee);
+        setSelectedEmployee(employee);
+    }
 
     const handleCancelEdit = () => {
         setName("");
         setEmail("");
         setEditId(null);
+    }
+
+    const handleSort = () => {
+        const sortedEmployees = [...employees].sort((a, b) => a.name.localeCompare(b.name));
+        setEmployees(sortedEmployees);
     }
 
     const handleDelete = (id) => {
@@ -34,9 +45,8 @@ export default function Employees() {
         const storedEmployees = localStorage.getItem("employees");
 
         if (storedEmployees) {
-            setEmployees(JSON.parse(storedEmployees));
-            setLoading(false);
-            return;
+            const parsedEmployees = JSON.parse(storedEmployees);
+            setEmployees(parsedEmployees);
         }
         try {
             const response = await fetch("https://jsonplaceholder.typicode.com/users");
@@ -72,6 +82,21 @@ export default function Employees() {
             return;
         }
 
+        if (!email.includes("@" && ".")) {
+            alert("Please enter a valid email");
+            return;
+        }
+
+        if (!isNaN(name)) {
+            alert("Name cannot be a number");
+            return;
+        }
+
+        if (name.trim().length < 3) {
+            alert("Name must be at least 3 characters long");
+            return;
+        }
+
         if (editId !== null) {
             const updatedEmployees =
                 employees.map((employee) =>
@@ -88,8 +113,9 @@ export default function Employees() {
         } else {
             const newEmployee = {
                 id: employees.length + 1,
-                name: name,
-                email: email,
+                name: name.trim(),
+                email: email.trim(),
+                staus: "Active",
             };
             setEmployees([...employees, newEmployee]);
         }
@@ -104,6 +130,9 @@ export default function Employees() {
 
                 <div className="card p-3 mb-4">
                     <h6>Total Employees: {employees.length}</h6>
+                    <button className="btn btn-success mt-2" onClick={handleSort}>
+                        Sort by Name
+                    </button>
                     <h4>Add Employee</h4>
                     <div className="row g-3">
                         <div className="col-md-5">
@@ -151,11 +180,31 @@ export default function Employees() {
                     />
                 </div>
                 <table className="table">
+                    {selectedEmployee && (
+                        <div className="card p-4 mt-4 shadow">
+                            <h4 className="mb-3">Employee Details</h4>
+                            <p>
+                                <strong>ID:</strong> {selectedEmployee.id} <br />
+                            </p>
+                            <p>
+                                <strong>Name:</strong> {selectedEmployee.name} <br />
+                            </p>
+                            <p>
+                                <strong>Email:</strong> {selectedEmployee.email} <br />
+                            </p>
+                            <p>
+                                <strong>Username:</strong> {selectedEmployee.username} <br />
+                            </p>
+                            <button className="btn btn-secondary"
+                                onClick={() => setSelectedEmployee(null)}>Close</button>
+                        </div>
+                    )}
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -166,8 +215,14 @@ export default function Employees() {
                                     <td>{employee.id}</td>
                                     <td>{employee.name}</td>
                                     <td>{employee.email}</td>
-                                    <td><button className="btn btn-sm btn-warning me-2"
-                                        onClick={() => handleEdit(employee)}>Edit</button>
+                                    <td>
+                                        <span className={`badge ${employee.statue = "Active" ? "bg-success" : "bg-danger"}`}>{employee.staus || "Active"}</span>
+                                    </td>
+                                    <td>
+                                        <button className="btn btn-info btn-sm me-2"
+                                            onClick={() => handleView(employee)}>View</button>
+                                        <button className="btn btn-sm btn-warning me-2"
+                                            onClick={() => handleEdit(employee)}>Edit</button>
 
                                         <button className="btn btn-danger btn-sm"
                                             onClick={() => handleDelete(employee.id)}>Delete</button></td>
