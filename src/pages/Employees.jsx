@@ -1,3 +1,4 @@
+import { all } from "axios";
 import MainLayout from "../layout/MainLayout";
 import { useEffect, useState } from "react";
 
@@ -9,6 +10,7 @@ export default function Employees() {
     });
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
+    const [statusFilter, setStatusFilter] = useState("All");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [editId, setEditId] = useState(null);
@@ -30,6 +32,16 @@ export default function Employees() {
         setEmployees(sortedEmployees);
     }
 
+    const handleToggleStatus = (id) => {
+        const updatedEmployees = employees.map((employee) =>
+            employee.id === id ? {
+                ...employee,
+                status: employee.status === "Active" ? "Inactive" : "Active",
+            } : employee
+        );
+        setEmployees(updatedEmployees);
+    }
+
     const handleDelete = (id) => {
         const isConfirmed = window.confirm("Are you sure you want to delete this employee?");
         if (!isConfirmed) {
@@ -39,19 +51,35 @@ export default function Employees() {
         setEmployees(updatedEmployees);
     }
 
-    const filteredEmployees = employees.filter((employee) => employee.name.toLowerCase().includes(search.toLowerCase()));
+    const filteredEmployees = employees.filter((employee) => {
+        const matchesSearch =
+            employee.name
+                .toLowerCase()
+                .includes(search.toLowerCase());
+
+        const matchesStatus =
+            statusFilter === "All" ||
+            (employee.status || "Active") === statusFilter;
+
+        return matchesSearch && matchesStatus;
+    });
 
     const fetchEmployees = async () => {
         const storedEmployees = localStorage.getItem("employees");
 
         if (storedEmployees) {
-            const parsedEmployees = JSON.parse(storedEmployees);
-            setEmployees(parsedEmployees);
+            setEmployees(JSON.parse(storedEmployees));
+            setLoading(false);
+            return;
         }
         try {
             const response = await fetch("https://jsonplaceholder.typicode.com/users");
             const data = await response.json();
-            setEmployees(data);
+            const employeesWithStatus = data.map((employee) => ({
+                ...employee,
+                status: "Active",
+            }));
+            setEmployees(employeesWithStatus);
         } finally {
             setLoading(false);
         }
@@ -82,7 +110,7 @@ export default function Employees() {
             return;
         }
 
-        if (!email.includes("@" && ".")) {
+        if (!email.includes("@") || !email.includes(".")) {
             alert("Please enter a valid email");
             return;
         }
@@ -115,7 +143,7 @@ export default function Employees() {
                 id: employees.length + 1,
                 name: name.trim(),
                 email: email.trim(),
-                staus: "Active",
+                status: "Active",
             };
             setEmployees([...employees, newEmployee]);
         }
@@ -123,17 +151,46 @@ export default function Employees() {
         setEmail("");
     };
 
+    const activeEmployees = employees.filter((employee) => (employee.status || "Active") === "Active").length;
+
+    const inactiveEmployees = employees.filter((employee) => (employee.status || "Active") === "Inactive").length;
+
     return (
         <MainLayout>
-            <div>
+            <div className="container">
                 <h3 className="mb-4">Employees List</h3>
 
-                <div className="card p-3 mb-4">
-                    <h6>Total Employees: {employees.length}</h6>
-                    <button className="btn btn-success mt-2" onClick={handleSort}>
-                        Sort by Name
-                    </button>
-                    <h4>Add Employee</h4>
+                <div className="row mb-3">
+
+                    <div className="col-md-4">
+                        <div className="card p-3">
+                            <h6>Total Employees</h6>
+                            <h3>{employees.length}</h3>
+                        </div>
+                    </div>
+
+                    <div className="col-md-4">
+                        <div className="card p-3">
+                            <h6>Active Employees</h6>
+                            <h3>{activeEmployees}</h3>
+                        </div>
+                    </div>
+
+                    <div className="col-md-4">
+                        <div className="card p-3">
+                            <h6>Inactive Employees</h6>
+                            <h3>{inactiveEmployees}</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <button className="btn btn-success mt-2 mb-2" onClick={handleSort}>
+                    Sort by Name
+                </button>
+
+                <div className="card p-4 mb-4">
+                    <h4 className="mb-3">Add Employee</h4>
+
                     <div className="row g-3">
                         <div className="col-md-5">
                             <input
@@ -170,77 +227,118 @@ export default function Employees() {
                     </div>
                 </div>
 
-                <div className="mb-3">
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Search employee..."
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                    />
-                </div>
-                <table className="table">
-                    {selectedEmployee && (
-                        <div className="card p-4 mt-4 shadow">
-                            <h4 className="mb-3">Employee Details</h4>
-                            <p>
-                                <strong>ID:</strong> {selectedEmployee.id} <br />
-                            </p>
-                            <p>
-                                <strong>Name:</strong> {selectedEmployee.name} <br />
-                            </p>
-                            <p>
-                                <strong>Email:</strong> {selectedEmployee.email} <br />
-                            </p>
-                            <p>
-                                <strong>Username:</strong> {selectedEmployee.username} <br />
-                            </p>
-                            <button className="btn btn-secondary"
-                                onClick={() => setSelectedEmployee(null)}>Close</button>
-                        </div>
-                    )}
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredEmployees.length > 0 ? (
-                            filteredEmployees.map((employee) => (
-                                <tr key={employee.id}>
-                                    <td>{employee.id}</td>
-                                    <td>{employee.name}</td>
-                                    <td>{employee.email}</td>
-                                    <td>
-                                        <span className={`badge ${employee.statue = "Active" ? "bg-success" : "bg-danger"}`}>{employee.staus || "Active"}</span>
-                                    </td>
-                                    <td>
-                                        <button className="btn btn-info btn-sm me-2"
-                                            onClick={() => handleView(employee)}>View</button>
-                                        <button className="btn btn-sm btn-warning me-2"
-                                            onClick={() => handleEdit(employee)}>Edit</button>
+                <div className="card p-4 mb-4">
+                    <h4 className="mb-3">Search Employees</h4>
 
-                                        <button className="btn btn-danger btn-sm"
-                                            onClick={() => handleDelete(employee.id)}>Delete</button></td>
-                                </tr>
-                            ))) : (
+                    <div className="row g-3">
+                        <div className="col-md-6">
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Search employee..."
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
+                        </div>
+
+                        <div className="col-md-3">
+                            <select className="form-select"
+                                value={statusFilter}
+                                onChange={(e) => setStatusFilter(e.target.value)}>
+                                <option value="All">All</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <div className="col-md-3">
+                            <button className="btn btn-success w-100"
+                                onClick={handleSort}>Sort By Name</button>
+                        </div>
+
+                    </div>
+                </div>
+
+                {selectedEmployee && (
+                    <div className="card p-4 mb-4 shadow">
+                        <h4 className="mb-3">Employee Details</h4>
+                        <p>
+                            <strong>ID:</strong> {selectedEmployee.id} <br />
+                        </p>
+                        <p>
+                            <strong>Name:</strong> {selectedEmployee.name} <br />
+                        </p>
+                        <p>
+                            <strong>Email:</strong> {selectedEmployee.email} <br />
+                        </p>
+                        <p>
+                            <strong>Username:</strong> {selectedEmployee.username} <br />
+                        </p>
+                        <button className="btn btn-secondary"
+                            onClick={() => setSelectedEmployee(null)}>Close</button>
+                    </div>
+                )}
+
+                <div className="card p-3">
+                    <table className="table table-hover align-middle">
+                        <thead>
                             <tr>
-                                <td
-                                    colSpan="4"
-                                    className="text-center text-muted">No employees found.
-                                </td>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                                <th>Toggle Status</th>
                             </tr>
-                        )}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {filteredEmployees.length > 0 ? (
+                                filteredEmployees.map((employee) => (
+                                    <tr key={employee.id}>
+                                        <td>{employee.id}</td>
+                                        <td>{employee.name}</td>
+                                        <td>{employee.email}</td>
+                                        <td>
+                                            <span className={`badge ${(employee.status || "Active") === "Active"
+                                                ? "bg-success"
+                                                : "bg-danger"}`}
+                                            >
+                                                {employee.status || "Active"}
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            <button className="btn btn-info btn-sm me-2"
+                                                onClick={() => handleView(employee)}>View</button>
+
+                                            <button className="btn btn-sm btn-warning me-2"
+                                                onClick={() => handleEdit(employee)}>Edit</button>
+
+                                            <button className="btn btn-danger btn-sm"
+                                                onClick={() => handleDelete(employee.id)}>Delete</button>
+                                        </td>
+
+                                        <td>
+                                            <button className="btn btn-primary btn-sm"
+                                                onClick={() => handleToggleStatus(employee.id)}>
+                                                Toggle Status
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))) : (
+                                <tr>
+                                    <td
+                                        colSpan="6"
+                                        className="text-center text-muted">No employees found.
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
 
-        </MainLayout>
+        </MainLayout >
 
     );
 }
