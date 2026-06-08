@@ -1,4 +1,3 @@
-import { all } from "axios";
 import MainLayout from "../layout/MainLayout";
 import { useEffect, useState } from "react";
 
@@ -13,8 +12,14 @@ export default function Employees() {
     const [statusFilter, setStatusFilter] = useState("All");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const [department, setDepartment] = useState("");
+    const [role, setRole] = useState("");
+    const [joiningDate, setJoiningDate] = useState("");
     const [editId, setEditId] = useState(null);
     const [selectedEmployee, setSelectedEmployee] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const employeesPerPage = 5;
+
 
     const handleView = (employee) => {
         console.log(employee);
@@ -24,6 +29,8 @@ export default function Employees() {
     const handleCancelEdit = () => {
         setName("");
         setEmail("");
+        setDepartment("");
+        setJoiningDate("");
         setEditId(null);
     }
 
@@ -64,25 +71,23 @@ export default function Employees() {
         return matchesSearch && matchesStatus;
     });
 
-    const fetchEmployees = async () => {
+    const indexOfLastEmployee = currentPage * employeesPerPage;
+
+    const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
+
+    const currentEmployees = filteredEmployees.slice(indexOfFirstEmployee, indexOfLastEmployee);
+
+    const totalPages = Math.ceil(
+        filteredEmployees.length / employeesPerPage
+    );
+
+    const fetchEmployees = () => {
         const storedEmployees = localStorage.getItem("employees");
 
         if (storedEmployees) {
             setEmployees(JSON.parse(storedEmployees));
-            setLoading(false);
-            return;
         }
-        try {
-            const response = await fetch("https://jsonplaceholder.typicode.com/users");
-            const data = await response.json();
-            const employeesWithStatus = data.map((employee) => ({
-                ...employee,
-                status: "Active",
-            }));
-            setEmployees(employeesWithStatus);
-        } finally {
-            setLoading(false);
-        }
+        setLoading(false);
     };
 
     useEffect(() => {
@@ -100,6 +105,9 @@ export default function Employees() {
     const handleEdit = (employee) => {
         setName(employee.name);
         setEmail(employee.email);
+        setDepartment(employee.department);
+        setRole(employee.role);
+        setJoiningDate(employee.joiningDate);
         setEditId(employee.id);
     }
 
@@ -107,6 +115,35 @@ export default function Employees() {
 
         if (name.trim() === "" || email.trim() === "") {
             alert("Please fill all fields");
+            return;
+        }
+
+        if (department === "") {
+            alert("Please select a department");
+            return;
+        }
+
+        if (role === "") {
+            alert("Please select a role");
+            return;
+        }
+
+        if (joiningDate === "") {
+            alert("Please select joining date");
+            return;
+        }
+
+        const emailExists = employees.some((employee) =>
+            employee.email.toLowerCase() === email.trim().toLowerCase());
+
+        if (emailExists && editId === null) {
+            alert("Email already exists");
+            return;
+        }
+
+        const nameRegex = /^[A-Za-z ]+$/;
+        if (!nameRegex.test(name.trim())) {
+            alert("Name should contain only letters");
             return;
         }
 
@@ -132,6 +169,9 @@ export default function Employees() {
                         ...employee,
                         name: name,
                         email: email,
+                        department,
+                        role,
+                        joiningDate,
                     }
                         : employee
                 );
@@ -139,60 +179,38 @@ export default function Employees() {
             setEmployees(updatedEmployees);
             setEditId(null);
         } else {
+            const nextId = employees.length > 0 ? Math.max(...employees.map(employee => employee.id)) + 1 : 1;
+
             const newEmployee = {
-                id: employees.length + 1,
+                id: nextId,
                 name: name.trim(),
                 email: email.trim(),
+                department,
+                role,
+                joiningDate,
                 status: "Active",
             };
             setEmployees([...employees, newEmployee]);
         }
         setName("");
         setEmail("");
+        setDepartment("");
+        setRole("");
+        setJoiningDate("");
     };
-
-    const activeEmployees = employees.filter((employee) => (employee.status || "Active") === "Active").length;
-
-    const inactiveEmployees = employees.filter((employee) => (employee.status || "Active") === "Inactive").length;
 
     return (
         <MainLayout>
             <div className="container">
-                <h3 className="mb-4">Employees List</h3>
-
-                <div className="row mb-3">
-
-                    <div className="col-md-4">
-                        <div className="card p-3">
-                            <h6>Total Employees</h6>
-                            <h3>{employees.length}</h3>
-                        </div>
-                    </div>
-
-                    <div className="col-md-4">
-                        <div className="card p-3">
-                            <h6>Active Employees</h6>
-                            <h3>{activeEmployees}</h3>
-                        </div>
-                    </div>
-
-                    <div className="col-md-4">
-                        <div className="card p-3">
-                            <h6>Inactive Employees</h6>
-                            <h3>{inactiveEmployees}</h3>
-                        </div>
-                    </div>
-                </div>
-
                 <button className="btn btn-success mt-2 mb-2" onClick={handleSort}>
                     Sort by Name
                 </button>
 
                 <div className="card p-4 mb-4">
-                    <h4 className="mb-3">Add Employee</h4>
+                    <h4 className="mb-3">{editId !== null ? "Edit Employee" : "Add Employee"}</h4>
 
                     <div className="row g-3">
-                        <div className="col-md-5">
+                        <div className="col-md-3">
                             <input
                                 type="text"
                                 className="form-control"
@@ -202,7 +220,7 @@ export default function Employees() {
                             />
                         </div>
 
-                        <div className="col-md-5">
+                        <div className="col-md-2">
                             <input
                                 type="email"
                                 className="form-control"
@@ -211,18 +229,59 @@ export default function Employees() {
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
-                        <div className="col-md-2">
-                            <button className="btn btn-primary w-100"
-                                onClick={handleAddEmployee}>
-                                {editId !== null ? "Update" : "Add"}
-                            </button>
 
-                            {editId !== null && (
-                                <button
-                                    className="btn btn-secondary w-100 mt-2"
-                                    onClick={handleCancelEdit}>Cancel Edit
+                        <div className="col-md-2">
+                            <select
+                                className="form-select"
+                                value={department}
+                                onChange={(e) => setDepartment(e.target.value)}
+                            >
+                                <option value="" >Select Department</option>
+                                <option value="IT">IT</option>
+                                <option value="HR">HR</option>
+                                <option value="Sales">Sales</option>
+                                <option value="Finance">Finance</option>
+                            </select>
+                        </div>
+
+                        <div className="col-md-2">
+                            <select
+                                className="form-select"
+                                value={role}
+                                onChange={(e) => setRole(e.target.value)}
+                            >
+                                <option value="">Select Role</option>
+                                <option value="Developer">Developer</option>
+                                <option value="Executive">Executive</option>
+                                <option value="Senior Executive">Senior Executive</option>
+                                <option value="Team Lead">Team Lead</option>
+                                <option value="Manager">Manager</option>
+                            </select>
+                        </div>
+
+                        <div className="col-md-2">
+                            <input
+                                type="date"
+                                className="form-control"
+                                value={joiningDate}
+                                onChange={(e) => setJoiningDate(e.target.value)}
+                            />
+                        </div>
+
+                        <div className="col-md-3">
+                            <div className="d-flex gap-2">
+                                <button className="btn btn-primary flex-grow-1"
+                                    onClick={handleAddEmployee}>
+                                    {editId !== null ? "Update" : "Add"}
                                 </button>
-                            )}
+
+                                {editId !== null && (
+                                    <button
+                                        className="btn btn-secondary"
+                                        onClick={handleCancelEdit}>Cancel Edit
+                                    </button>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -271,6 +330,14 @@ export default function Employees() {
                             <strong>Email:</strong> {selectedEmployee.email} <br />
                         </p>
                         <p>
+                            <strong>Department:</strong> {selectedEmployee.department || ""}<br />
+                        </p>
+                        <p>
+                            <strong>Role:</strong>{selectedEmployee.role || ""}<br />
+                        </p>
+                        <p><strong>DOJ:</strong>{selectedEmployee.joiningDate || "-"}<br />
+                        </p>
+                        <p>
                             <strong>Username:</strong> {selectedEmployee.username} <br />
                         </p>
                         <button className="btn btn-secondary"
@@ -279,61 +346,79 @@ export default function Employees() {
                 )}
 
                 <div className="card p-3">
-                    <table className="table table-hover align-middle">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                                <th>Toggle Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredEmployees.length > 0 ? (
-                                filteredEmployees.map((employee) => (
-                                    <tr key={employee.id}>
-                                        <td>{employee.id}</td>
-                                        <td>{employee.name}</td>
-                                        <td>{employee.email}</td>
-                                        <td>
-                                            <span className={`badge ${(employee.status || "Active") === "Active"
-                                                ? "bg-success"
-                                                : "bg-danger"}`}
-                                            >
-                                                {employee.status || "Active"}
-                                            </span>
-                                        </td>
+                    <div className="table-responsive">
+                        <table className="table table-hover align-middle">
+                            <thead>
+                                <tr>
+                                    <th>S.No.</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Department</th>
+                                    <th>Role</th>
+                                    <th>DOJ</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                    <th>Toggle Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {filteredEmployees.length > 0 ? (
+                                    currentEmployees.map((employee, index) => (
+                                        <tr key={employee.index}>
+                                            <td className="text-nowrap">{indexOfFirstEmployee + index + 1}</td>
+                                            <td className="text-nowrap">{employee.id}</td>
+                                            <td className="text-nowrap">{employee.name}</td>
+                                            <td className="text-nowrap">{employee.email}</td>
+                                            <td className="text-nowrap">{employee.department || "-"}</td>
+                                            <td className="text-nowrap">{employee.role || "-"}</td>
+                                            <td className="text-nowrap">{employee.joiningDate || "-"}</td>
+                                            <td>
+                                                <span className={`badge ${(employee.status || "Active") === "Active"
+                                                    ? "bg-success"
+                                                    : "bg-danger"}`}
+                                                >
+                                                    {employee.status || "Active"}
+                                                </span>
+                                            </td>
 
-                                        <td>
-                                            <button className="btn btn-info btn-sm me-2"
-                                                onClick={() => handleView(employee)}>View</button>
+                                            <td className="text-nowrap">
+                                                <button className="btn btn-info btn-sm me-2"
+                                                    onClick={() => handleView(employee)}>View</button>
 
-                                            <button className="btn btn-sm btn-warning me-2"
-                                                onClick={() => handleEdit(employee)}>Edit</button>
+                                                <button className="btn btn-sm btn-warning me-2"
+                                                    onClick={() => handleEdit(employee)}>Edit</button>
 
-                                            <button className="btn btn-danger btn-sm"
-                                                onClick={() => handleDelete(employee.id)}>Delete</button>
-                                        </td>
+                                                <button className="btn btn-danger btn-sm"
+                                                    onClick={() => handleDelete(employee.id)}>Delete</button>
+                                            </td>
 
-                                        <td>
-                                            <button className="btn btn-primary btn-sm"
-                                                onClick={() => handleToggleStatus(employee.id)}>
-                                                Toggle Status
-                                            </button>
+                                            <td className="text-nowrap">
+                                                <button className="btn btn-primary btn-sm"
+                                                    onClick={() => handleToggleStatus(employee.id)}>
+                                                    Toggle Status
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))) : (
+                                    <tr>
+                                        <td
+                                            colSpan="6"
+                                            className="text-center text-muted">No employees found.
                                         </td>
                                     </tr>
-                                ))) : (
-                                <tr>
-                                    <td
-                                        colSpan="6"
-                                        className="text-center text-muted">No employees found.
-                                    </td>
-                                </tr>
-                            )}
-                        </tbody>
-                    </table>
+                                )}
+                            </tbody>
+                        </table>
+                        <div className="d-flex justify-content-center mt-3">
+                            {Array.from({ length: totalPages }, (_, index) => (
+                                <button
+                                    key={index}
+                                    className={`btn me-2 ${currentPage === index + 1 ? "btn-primary" : "btn-outline-primary"}`}
+                                    onClick={() => setCurrentPage(index + 1)}>{index + 1}</button>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
 
