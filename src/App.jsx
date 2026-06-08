@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Employees from "./pages/Employees";
 import Login from "./pages/Login";
+import Attendance from './pages/Attendance'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path='/' element={<Login />} />
           <Route path='dashboard' element={<Dashboard />} />
           <Route path='/employees' element={<Employees />} />
+          <Route path='/attendance' element={<Attendance />} />
         </Route>
       </Routes>
     </BrowserRouter>

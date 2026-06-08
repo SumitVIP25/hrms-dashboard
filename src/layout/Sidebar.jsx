@@ -9,6 +9,7 @@ export default function Sidebar() {
             <ul className="list-unstyled">
                 <li className="mb-3"><NavLink to="/dashboard" className={({ isActive }) => isActive ? "text-warning text-decoration-none" : "text-white text-decoration-none"}>Dashboard</NavLink></li>
                 <li className="mb-3"> <NavLink to="/employees" className={({ isActive }) => isActive ? "text-warning text-decoration-none" : "text-white text-decoration-none"}>Employees</NavLink></li>
+                <li className="mb-3"><NavLink to="/attendance" className={({ isActive }) => isActive ? "text-warning text-decoration-none" : "text-white text-decoration-none"}>Attendance</NavLink></li>
             </ul>
         </div >);
 }
