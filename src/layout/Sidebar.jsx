@@ -10,6 +10,10 @@ export default function Sidebar() {
                 <li className="mb-3"><NavLink to="/dashboard" className={({ isActive }) => isActive ? "text-warning text-decoration-none" : "text-white text-decoration-none"}>Dashboard</NavLink></li>
                 <li className="mb-3"> <NavLink to="/employees" className={({ isActive }) => isActive ? "text-warning text-decoration-none" : "text-white text-decoration-none"}>Employees</NavLink></li>
                 <li className="mb-3"><NavLink to="/attendance" className={({ isActive }) => isActive ? "text-warning text-decoration-none" : "text-white text-decoration-none"}>Attendance</NavLink></li>
+                <li className="mb-3"><NavLink to="/leave" className={({ isActive }) => isActive ? "text-warning text-decoration-none" : "text-white text-decoration-none"}>Leave Management</NavLink></li>
+                <li className="mb-3"><NavLink to="/payroll" className={({ isActive }) => isActive ? "text-warning text-decoration-none" : "text-white text-decoration-none"}>Payroll</NavLink></li>
+                <li className="mb-3"><NavLink to="/reports" className={({ isActive }) => isActive ? "text-warning text-decoration-none" : "text-white text-decoration-none"}>Reports</NavLink></li>
+                <li className="mb-3"><NavLink to="/settings" className={({ isActive }) => isActive ? "text-warning text-decoration-none" : "text-white text-decoration-none"}>Settings</NavLink></li>
             </ul>
         </div >);
 }
