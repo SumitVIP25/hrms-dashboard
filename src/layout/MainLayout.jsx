@@ -1,7 +1,10 @@
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
+import { NavLink } from "react-router-dom";
+
 
 export default function MainLayout({ children }) {
+
     return (
         <div className="d-flex">
             <Sidebar />

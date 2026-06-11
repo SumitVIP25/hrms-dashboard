@@ -1,14 +1,30 @@
 import { useState } from "react";
+import { useNavigate, Navigate } from "react-router-dom";
 import InputField from "../components/inputField";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (email === "admin@hrms.com" &&
+            password === "admin123") {
+            localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("userEmail", email);
+
+            navigate("/dashboard");
+
+        } else {
+            alert("Invalid email or password");
+        }
     };
+
+
     return (
         <div className="container-fluid vh-100 d-flex justify-content-center align-items-center bg-light">
             <div className="card shadow p-4" style={{ width: "400px" }}>
