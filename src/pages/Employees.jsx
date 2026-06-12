@@ -341,7 +341,7 @@ export default function Employees() {
                     </div>
                 )}
 
-                <div className="card p-3">
+                <div className="card p-3 w-100 overflow-hidden">
                     <div className="table-responsive" style={{ minHeight: "500px" }}>
                         <table className="table table-hover align-middle">
                             <thead>
@@ -362,13 +362,20 @@ export default function Employees() {
                                 {currentEmployees.length > 0 ? (
                                     currentEmployees.map((employee, index) => (
                                         <tr key={employee.id}>
-                                            <td className="text-nowrap">{indexOfFirstEmployee + index + 1}</td>
-                                            <td className="text-nowrap">{employee.id}</td>
-                                            <td className="text-nowrap">{employee.name}</td>
-                                            <td className="text-nowrap">{employee.email}</td>
-                                            <td>{employee.department || "-"}</td>
-                                            <td className="text-nowrap">{employee.role || "-"}</td>
-                                            <td>{employee.joiningDate || "-"}</td>
+                                            <td>{indexOfFirstEmployee + index + 1}</td>
+
+                                            <td className="text-truncate">{employee.id}</td>
+
+                                            <td className="text-truncate" style={{ maxWidth: "150px", cursor: "pointer" }} data-bs-toggle="tooltip" data-bs-placement="top" title={employee.name}>{employee.name}</td>
+
+                                            <td className="text-truncate" style={{ maxWidth: "150px", cursor: "pointer" }} data-bs-toggle="tooltip" data-bs-placement="top" title={employee.email}>{employee.email}</td>
+
+                                            <td className="text-truncate" style={{ maxWidth: "150px", cursor: "pointer" }} data-bs-toggle="tooltip" data-bs-placement="top" title={employee.department}>{employee.department || "-"}</td>
+
+                                            <td className="text-truncate" style={{ maxWidth: "150px", cursor: "pointer" }} data-bs-toggle="tooltip" data-bs-placement="top" title={employee.role}>{employee.role || "-"}</td>
+
+                                            <td className="text-truncate" style={{ maxWidth: "150px", cursor: "pointer" }} data-bs-toggle="tooltip" data-bs-placement="top" title={employee.joiningDate}>{employee.joiningDate || "-"}</td>
+
                                             <td>
                                                 <span className={`badge ${(employee.status || "Active") === "Active"
                                                     ? "bg-success"

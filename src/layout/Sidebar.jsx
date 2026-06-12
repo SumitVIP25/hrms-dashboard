@@ -4,7 +4,7 @@ export default function Sidebar() {
     console.log("Sidebar Render");
     return (
         <div className="sidebar bg-dark text-white p-3 flex-shrink-0"
-            style={{ width: "180px", minHeight: "100vh", flexShrink: 0 }}
+            style={{ width: "190px", minHeight: "100vh", flexShrink: 0 }}
         >
             <h4 className="mb-4">HRMS</h4>
             <ul className="list-unstyled">
