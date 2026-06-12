@@ -1,13 +1,16 @@
 import MainLayout from "../layout/MainLayout";
 import { useEffect, useState } from "react";
 
+
+
 export default function Employees() {
+    console.log("Employees Render");
 
     const [employees, setEmployees] = useState(() => {
         const storedEmployees = localStorage.getItem("employees");
         return storedEmployees ? JSON.parse(storedEmployees) : [];
     });
-    const [loading, setLoading] = useState(true);
+
     const [search, setSearch] = useState("");
     const [statusFilter, setStatusFilter] = useState("All");
     const [name, setName] = useState("");
@@ -81,18 +84,7 @@ export default function Employees() {
         filteredEmployees.length / employeesPerPage
     );
 
-    const fetchEmployees = () => {
-        const storedEmployees = localStorage.getItem("employees");
 
-        if (storedEmployees) {
-            setEmployees(JSON.parse(storedEmployees));
-        }
-        setLoading(false);
-    };
-
-    useEffect(() => {
-        fetchEmployees();
-    }, []);
 
     useEffect(() => {
         if (employees.length > 0) {
@@ -102,9 +94,6 @@ export default function Employees() {
         }
     }, [employees]);
 
-    if (loading) {
-        return <h2>Loading...</h2>;
-    }
 
     const handleEdit = (employee) => {
         setName(employee.name);
@@ -205,7 +194,7 @@ export default function Employees() {
 
     return (
         <MainLayout>
-            <div className="container">
+            <div className="container-fluid">
                 <button className="btn btn-success mt-2 mb-2" onClick={handleSort}>
                     Sort by Name
                 </button>
@@ -293,14 +282,17 @@ export default function Employees() {
                 <div className="card p-4 mb-4">
                     <h4 className="mb-3">Search Employees</h4>
 
-                    <div className="row g-3">
-                        <div className="col-md-6">
+                    <div className="row g-3 mx-0">
+                        <div className="col-md-6 px-0">
                             <input
                                 type="text"
                                 className="form-control"
                                 placeholder="Search employee..."
                                 value={search}
-                                onChange={(e) => setSearch(e.target.value)}
+                                onChange={(e) => {
+                                    setSearch(e.target.value);
+                                    setCurrentPage(1);
+                                }}
                             />
                         </div>
 
@@ -350,7 +342,7 @@ export default function Employees() {
                 )}
 
                 <div className="card p-3">
-                    <div className="table-responsive">
+                    <div className="table-responsive" style={{ minHeight: "500px" }}>
                         <table className="table table-hover align-middle">
                             <thead>
                                 <tr>
@@ -367,16 +359,16 @@ export default function Employees() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {filteredEmployees.length > 0 ? (
+                                {currentEmployees.length > 0 ? (
                                     currentEmployees.map((employee, index) => (
-                                        <tr key={employee.index}>
+                                        <tr key={employee.id}>
                                             <td className="text-nowrap">{indexOfFirstEmployee + index + 1}</td>
                                             <td className="text-nowrap">{employee.id}</td>
                                             <td className="text-nowrap">{employee.name}</td>
                                             <td className="text-nowrap">{employee.email}</td>
-                                            <td className="text-nowrap">{employee.department || "-"}</td>
+                                            <td>{employee.department || "-"}</td>
                                             <td className="text-nowrap">{employee.role || "-"}</td>
-                                            <td className="text-nowrap">{employee.joiningDate || "-"}</td>
+                                            <td>{employee.joiningDate || "-"}</td>
                                             <td>
                                                 <span className={`badge ${(employee.status || "Active") === "Active"
                                                     ? "bg-success"
@@ -407,7 +399,7 @@ export default function Employees() {
                                     ))) : (
                                     <tr>
                                         <td
-                                            colSpan="6"
+                                            colSpan="12"
                                             className="text-center text-muted">No employees found.
                                         </td>
                                     </tr>
@@ -427,7 +419,7 @@ export default function Employees() {
             </div>
 
 
-        </MainLayout >
+        </MainLayout>
 
     );
 }

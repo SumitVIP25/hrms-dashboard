@@ -8,7 +8,7 @@ export default function MainLayout({ children }) {
     return (
         <div className="d-flex">
             <Sidebar />
-            <div className="flex-grow-1 bg-light">
+            <div className="flex-grow-1 bg-light" style={{ minWidth: 0 }}>
                 <Navbar />
                 <div className="p-4">
                     {children}
