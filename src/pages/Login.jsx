@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import InputField from "../components/inputField";
+import "../CSS/Login.css";
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -29,10 +30,13 @@ export default function Login() {
 
 
     return (
-        <div className="container-fluid vh-100 d-flex justify-content-center align-items-center bg-light">
-            <div className="card shadow p-4" style={{ width: "400px" }}>
-                <h2 className="text-center mb-4">HRMS Login</h2>
-                <p className="text-center mb-2">Welcome back! Please login.</p>
+        <div className="login-container">
+            <div className="login-card">
+                <div className="text-center mb-4">
+                    <h2 className="login-title">HRMS Portal</h2>
+                    <p className="login-subtitle">Welcome back <br /> Sign in to continue</p>
+                </div>
+
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <InputField
@@ -63,9 +67,9 @@ export default function Login() {
                         <a href="#" className="text-decoration-none">Forgot Password?</a>
                     </div>
 
-                    <button className="btn btn-primary w-100 mb-3">Login</button>
+                    <button className="btn login-btn w-100 mb-3">Login</button>
                 </form>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }

@@ -13,6 +13,7 @@ import { Pie, Doughnut } from "react-chartjs-2";
 import { TbBackground } from "react-icons/tb";
 import ChartdataLabels from "chartjs-plugin-datalabels";
 import { color } from "chart.js/helpers";
+import "../CSS/Reports.css";
 
 ChartJS.register(
     ArcElement,
@@ -110,12 +111,15 @@ export default function Reports() {
     return (
         <MainLayout>
             <div className="container-fluid">
-                <h2 className="mb-4">Reports Dashboard</h2>
+                <div className="mb-4">
+                    <h2 className="reports-title">Reports Dashboard</h2>
+                    <p className="reports-subtitles">Insights and analytics of your HRMS data.</p>
+                </div>
 
                 {/*Summary cards*/}
                 <div className="row mb-4">
                     <div className="col-md-2">
-                        <div className="card text-center p-3 shadow-sm">
+                        <div className="report-card report-blue">
                             <h6>Total Employees</h6>
                             <h3>{totalEmployees}</h3>
                         </div>
@@ -123,28 +127,28 @@ export default function Reports() {
 
 
                     <div className="col-md-2">
-                        <div className="card text-center p-3 shadow-sm">
+                        <div className="report-card report-green">
                             <h6>Active</h6>
                             <h3>{activeEmployees}</h3>
                         </div>
                     </div>
 
                     <div className="col-md-2">
-                        <div className="card text-center p-3 shadow-sm">
+                        <div className="report-card report-red">
                             <h6>Inactive</h6>
                             <h3>{inactiveEmployees}</h3>
                         </div>
                     </div>
 
                     <div className="col-md-3">
-                        <div className="card text-center p-3 shadow-sm">
+                        <div className="report-card report-purple">
                             <h6>Payroll Records</h6>
                             <h3>{totalPayrolls}</h3>
                         </div>
                     </div>
 
                     <div className="col-md-3">
-                        <div className="card text-center p-3 shadow-sm">
+                        <div className="report-card report-yellow">
                             <h6>Leave Requests</h6>
                             <h3>{totalLeaves}</h3>
                         </div>
@@ -154,8 +158,8 @@ export default function Reports() {
                 {/* Charts */}
                 <div className="row">
                     <div className="col-md-6 mb-4">
-                        <div className="card p-4 shadow-sm">
-                            <h5 className="mb-3">Employees by Department</h5>
+                        <div className="chart-card">
+                            <h5 className="chart-title">Employees by Department</h5>
                             <div style={{ height: "300px" }}>
                                 <Pie data={departmentData} options={pieOptions} />
                             </div>

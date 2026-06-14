@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import MainLayout from "../layout/MainLayout";
+import "../CSS/Tables.css";
 
 export default function Payroll() {
 
@@ -159,11 +160,11 @@ export default function Payroll() {
 
             </div>
 
-            <div className="card p-4 mt-4">
+            <div className="table-card p-4 mt-4">
                 <h4 className="mb-4">Payroll Records</h4>
 
-                <div className="table-responsive">
-                    <table className="table table-hover align-middle">
+                <div className="table-wrapper">
+                    <table className="table custom-table align-middle">
                         <thead>
                             <tr>
                                 <th>S.No.</th>

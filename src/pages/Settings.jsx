@@ -1,5 +1,6 @@
 import MainLayout from "../layout/MainLayout";
 import { useState } from "react";
+import "../CSS/Settings.css";
 
 export default function Settings() {
 
@@ -42,14 +43,19 @@ export default function Settings() {
     return (
         <MainLayout>
             <div className="container-fluid">
-                <h2 className="mb-4">Settings</h2>
+                <div>
+                    <h2 className="mb-4">Settings</h2>
+                    <p className="settings-subtitle">
+                        Manage your profile and system preferences.
+                    </p>
+                </div>
 
                 <div className="row">
 
                     {/* profile information */}
                     <div className="col-md-4 mb-4">
-                        <div className="card p-4 shadow-sm">
-                            <h4 className="mb-3">Profile Information</h4>
+                        <div className="settings-card settings-blue">
+                            <h4 className="settings-card-title">Profile Information</h4>
                             <p>
                                 <strong>Name:</strong> HR Admin
                             </p>
@@ -66,11 +72,11 @@ export default function Settings() {
 
                     {/*Change Password */}
                     <div className="col-md-4 mb-4">
-                        <div className="card p-4 shadow-sm">
-                            <h4 className="mb-3">Change Password</h4>
+                        <div className="settings-card settings-green">
+                            <h4 className="settings-card-title">Change Password</h4>
                             <input
                                 type="password"
-                                className="form-control mb-3"
+                                className="form-control settings-input mb-3"
                                 placeholder="Current Password"
                                 value={currentPassword}
                                 onChange={(e) => setCurrentPassword(e.target.value)}
@@ -78,7 +84,7 @@ export default function Settings() {
 
                             <input
                                 type="password"
-                                className="form-control mb-3"
+                                className="form-control settings-input mb-3"
                                 placeholder="New Password"
                                 value={newPassword}
                                 onChange={(e) => setNewPassword(e.target.value)}
@@ -86,13 +92,13 @@ export default function Settings() {
 
                             <input
                                 type="password"
-                                className="form-control mb-3"
+                                className="form-control settings-input mb-3"
                                 placeholder="Confirm Password"
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                             />
 
-                            <button className="btn btn-primary w-100"
+                            <button className="btn settings-btn w-100"
                                 onClick={handlePasswordChange}>
                                 Update Password
                             </button>
@@ -101,8 +107,8 @@ export default function Settings() {
 
                     {/* System Information */}
                     <div className="col-md-4 mb-4">
-                        <div className="card p-4 shadow-sm">
-                            <h4 className="mb-3">System Information</h4>
+                        <div className="settings-card settings-purple">
+                            <h4 className="settings-card-title">System Information</h4>
                             <p>
                                 <strong>HRMS Version:</strong> 1.0
                             </p>

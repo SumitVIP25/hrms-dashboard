@@ -1,0 +1,94 @@
+.reports-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 5px;
+}
+
+.reports-subtitle {
+    color: #64748b;
+    margin-bottom: 0;
+}
+
+/* Summary Cards */
+
+.report-card {
+    border: none;
+    border-radius: 18px;
+
+    padding: 25px;
+
+    text-align: center;
+
+    box-shadow: 0 8px 20px #00000014;
+
+    transition: all 0.3s ease;
+
+    height: 100%;
+}
+
+.report-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow: 0 12px 25px #0000001f;
+}
+
+.report-card h6 {
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.report-card h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+/* Colors */
+
+.report-blue {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    color: #1e40af;
+}
+
+.report-green {
+    background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+    color: #166534;
+}
+
+.report-red {
+    background: linear-gradient(135deg, #fee2e2, #fecaca);
+    color: #991b1b;
+}
+
+.report-purple {
+    background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
+    color: #7e22ce;
+}
+
+.report-yellow {
+    background: linear-gradient(135deg, #fef9c3, #fde68a);
+    color: #92400e;
+}
+
+/* Chart Cards */
+
+.chart-card {
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    box-shadow: 0 8px 20px #00000014;
+
+    height: 100%;
+}
+
+.chart-title {
+    font-weight: 600;
+
+    color: #1e293b;
+
+    margin-bottom: 20px;
+}

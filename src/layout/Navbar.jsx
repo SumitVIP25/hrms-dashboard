@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
+import "../CSS/Navbar.css";
 
 export default function Navbar() {
-    console.log("Navbar Render");
 
     const navigate = useNavigate();
 
@@ -13,10 +13,19 @@ export default function Navbar() {
     };
 
     return (
-        <div className="bg-white shadow-sm p-3 d-flex justify-content-between">
-            <h5>Dashboard</h5>
-            <button className="btn btn-danger btn-sm"
-                onClick={handleLogout}>Logout</button>
+        <div className="navbar-custom">
+            <div>
+                <h5 className="mb-0 fw-bold">Welcome, HR Admin</h5>
+                <small className="text-muted">Human Resource Managememt System</small>
+            </div>
+
+            <div className="d-flex align-items-center gap-3">
+                <div className="profile-avatar">HR</div>
+                <span className="fw-semibold">HR Admin</span>
+
+                <button className="logout-btn"
+                    onClick={handleLogout}>Logout</button>
+            </div>
         </div>
     );
 }

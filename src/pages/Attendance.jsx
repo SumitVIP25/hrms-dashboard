@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import MainLayout from "../layout/MainLayout"
+import "../CSS/Tables.css";
 
 export default function Attendance() {
     const [attendance, setAttendance] = useState([]);
@@ -99,9 +100,9 @@ export default function Attendance() {
                     </div>
                 </div>
                 <p>Total Employees: {employees.length}</p>
-                <div className="card p-3">
-                    <div className="table-responsive" style={{ minHeight: "500px" }}>
-                        <table className="table table-hover align-middle">
+                <div className="table-card p-4">
+                    <div className="table-wrapper" style={{ minHeight: "500px" }}>
+                        <table className="table custom-table">
                             <thead>
                                 <tr>
                                     <th>ID</th>

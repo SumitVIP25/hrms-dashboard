@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import MainLayout from "../layout/MainLayout";
+import "../CSS/Tables.css";
 
 export default function Leave() {
     const [leaveRequests, setLeaveRequests] = useState([]);
@@ -181,10 +182,10 @@ export default function Leave() {
                 </div>
 
 
-                <div className="card p-4 mt-4">
+                <div className="table-card p-4 mt-4">
                     <h4 className="mb-3">Leave Requests</h4>
 
-                    <table className="table table-hover align-middle">
+                    <table className="table custom-table align-middle">
                         <thead>
                             <tr>
                                 <th>S.no</th>

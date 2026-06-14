@@ -1,20 +1,23 @@
 import { NavLink } from "react-router-dom";
+import "../CSS/Sidebar.css";
+import { FaTachometerAlt, FaUsers, FaCalendarCheck, FaClipboardList, FaMoneyCheckAlt, FaChartPie, FaCog, } from "react-icons/fa";
+
+
 
 export default function Sidebar() {
-    console.log("Sidebar Render");
     return (
-        <div className="sidebar bg-dark text-white p-3 flex-shrink-0"
+        <div className="sidebar p-3 flex-shrink-0"
             style={{ width: "190px", minHeight: "100vh", flexShrink: 0 }}
         >
-            <h4 className="mb-4">HRMS</h4>
+            <h4>HRMS</h4>
             <ul className="list-unstyled">
-                <li className="mb-3"><NavLink to="/dashboard" className={({ isActive }) => isActive ? "text-warning text-decoration-none" : "text-white text-decoration-none"}>Dashboard</NavLink></li>
-                <li className="mb-3"> <NavLink to="/employees" className={({ isActive }) => isActive ? "text-warning text-decoration-none" : "text-white text-decoration-none"}>Employees</NavLink></li>
-                <li className="mb-3"><NavLink to="/attendance" className={({ isActive }) => isActive ? "text-warning text-decoration-none" : "text-white text-decoration-none"}>Attendance</NavLink></li>
-                <li className="mb-3"><NavLink to="/leave" className={({ isActive }) => isActive ? "text-warning text-decoration-none" : "text-white text-decoration-none"}>Leave Management</NavLink></li>
-                <li className="mb-3"><NavLink to="/payroll" className={({ isActive }) => isActive ? "text-warning text-decoration-none" : "text-white text-decoration-none"}>Payroll</NavLink></li>
-                <li className="mb-3"><NavLink to="/reports" className={({ isActive }) => isActive ? "text-warning text-decoration-none" : "text-white text-decoration-none"}>Reports</NavLink></li>
-                <li className="mb-3"><NavLink to="/settings" className={({ isActive }) => isActive ? "text-warning text-decoration-none" : "text-white text-decoration-none"}>Settings</NavLink></li>
+                <li className="mb-3"><NavLink to="/dashboard" className={({ isActive }) => `sidebar-link ${isActive ? "active-link" : ""}`}>Dashboard</NavLink></li>
+                <li className="mb-3"> <NavLink to="/employees" className={({ isActive }) => `sidebar-link ${isActive ? "active-link" : ""}`}>Employees</NavLink></li>
+                <li className="mb-3"><NavLink to="/attendance" className={({ isActive }) => `sidebar-link ${isActive ? "active-link" : ""}`}>Attendance</NavLink></li>
+                <li className="mb-3"><NavLink to="/leave" className={({ isActive }) => `sidebar-link ${isActive ? "active-link" : ""}`}>Leave Management</NavLink></li>
+                <li className="mb-3"><NavLink to="/payroll" className={({ isActive }) => `sidebar-link ${isActive ? "active-link" : ""}`}>Payroll</NavLink></li>
+                <li className="mb-3"><NavLink to="/reports" className={({ isActive }) => `sidebar-link ${isActive ? "active-link" : ""}`}>Reports</NavLink></li>
+                <li className="mb-3"><NavLink to="/settings" className={({ isActive }) => `sidebar-link ${isActive ? "active-link" : ""}`}>Settings</NavLink></li>
             </ul>
-        </div >);
+        </div>);
 }

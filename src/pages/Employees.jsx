@@ -1,5 +1,6 @@
 import MainLayout from "../layout/MainLayout";
 import { useEffect, useState } from "react";
+import "../CSS/Tables.css";
 
 
 
@@ -339,9 +340,9 @@ export default function Employees() {
                     </div>
                 )}
 
-                <div className="card p-3 w-100 overflow-hidden">
-                    <div className="table-responsive" style={{ minHeight: "500px" }}>
-                        <table className="table table-hover align-middle">
+                <div className="table-card p-3">
+                    <div className="table-wrapper">
+                        <table className="table custom-table align-middle" style={{ minHeight: "500px" }}>
                             <thead>
                                 <tr>
                                     <th>S.No.</th>
