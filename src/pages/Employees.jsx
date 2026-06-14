@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 
 export default function Employees() {
-    console.log("Employees Render");
 
     const [employees, setEmployees] = useState(() => {
         const storedEmployees = localStorage.getItem("employees");
@@ -25,7 +24,6 @@ export default function Employees() {
 
 
     const handleView = (employee) => {
-        console.log(employee);
         setSelectedEmployee(employee);
     }
 

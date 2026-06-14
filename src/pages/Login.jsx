@@ -12,10 +12,13 @@ export default function Login() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (email === "admin@hrms.com" &&
-            password === "admin123") {
+        const storedEmail = localStorage.getItem("userEmail") || "admin@hrms.com";
+        const storedPassword = localStorage.getItem("userPassword") || "admin123";
+
+        if (email.trim() === storedEmail &&
+            password === storedPassword) {
             localStorage.setItem("isLoggedIn", "true");
-            localStorage.setItem("userEmail", email);
+            localStorage.setItem("userEmail", storedEmail);
 
             navigate("/dashboard");
 

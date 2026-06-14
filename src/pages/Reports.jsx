@@ -28,7 +28,7 @@ export default function Reports() {
 
     const employees = JSON.parse(localStorage.getItem("employees")) || [];
     const payrolls = JSON.parse(localStorage.getItem("payrolls")) || [];
-    const leaves = JSON.parse(localStorage.getItem("leaves")) || [];
+    const leaves = JSON.parse(localStorage.getItem("leaveRequests")) || [];
 
     const totalEmployees = employees.length;
 

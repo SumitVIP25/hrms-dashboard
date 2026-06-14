@@ -4,12 +4,14 @@ import { useState } from "react";
 export default function Settings() {
 
     const userEmail = localStorage.getItem("userEmail") || "admin@hrms.com";
+    localStorage.setItem("userEmail", userEmail);
 
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
     const handlePasswordChange = () => {
+
         const storedPassword = localStorage.getItem("userPassword") || "admin123";
 
         if (currentPassword !== storedPassword) {
@@ -17,7 +19,7 @@ export default function Settings() {
             return;
         }
 
-        if (newPassword !== storedPassword) {
+        if (newPassword !== confirmPassword) {
             alert("New password do not match");
             return;
         }
