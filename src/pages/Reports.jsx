@@ -1,41 +1,46 @@
 import MainLayout from "../layout/MainLayout";
+import { useMemo } from "react";
 import {
     Chart as ChartJS,
     ArcElement,
     Tooltip,
     Legend,
-    CategoryScale,
-    LinearScale,
-    BarElement,
 } from "chart.js";
 
 import { Pie, Doughnut } from "react-chartjs-2";
-import { TbBackground } from "react-icons/tb";
 import ChartdataLabels from "chartjs-plugin-datalabels";
-import { color } from "chart.js/helpers";
 import "../CSS/Reports.css";
 
 ChartJS.register(
     ArcElement,
     Tooltip,
     Legend,
-    CategoryScale,
-    LinearScale,
-    BarElement,
     ChartdataLabels
 )
 
 export default function Reports() {
 
-    const employees = JSON.parse(localStorage.getItem("employees")) || [];
-    const payrolls = JSON.parse(localStorage.getItem("payrolls")) || [];
-    const leaves = JSON.parse(localStorage.getItem("leaveRequests")) || [];
+    const employees = useMemo(() => {
+        return JSON.parse(localStorage.getItem("employees")) || [];
+    }, []);
+
+    const payrolls = useMemo(() => {
+        return JSON.parse(localStorage.getItem("payrolls")) || [];
+    }, []);
+
+    const leaves = useMemo(() => {
+        return JSON.parse(localStorage.getItem("leaveRequests")) || [];
+    }, []);
 
     const totalEmployees = employees.length;
 
-    const activeEmployees = employees.filter(emp => (emp.status || "Active") === "Active").length;
+    const activeEmployees = useMemo(() =>
+        employees.filter(emp => (emp.status || "Active") === "Active").length, [employees]);
 
-    const inactiveEmployees = employees.filter(emp => emp.status === "Inactive").length;
+
+    const inactiveEmployees = useMemo(() =>
+        employees.filter(emp => emp.status === "Inactive").length, [employees]);
+
 
     const totalPayrolls = payrolls.length;
 
@@ -54,7 +59,7 @@ export default function Reports() {
         }
     });
 
-    const departmentData = {
+    const departmentData = useMemo(() => ({
         labels: ["IT", "HR", "Sales", "Finance"],
         datasets: [{
             label: "Employees",
@@ -72,9 +77,9 @@ export default function Reports() {
             ],
             borderWidth: 1,
         }],
-    };
+    }), [employees]);
 
-    const statusData = {
+    const statusData = useMemo(() => ({
         labels: ["Active", "Inactive"],
         datasets: [
             {
@@ -91,9 +96,9 @@ export default function Reports() {
                 ],
                 borderWidth: 1,
             }],
-    };
+    }), [activeEmployees, inactiveEmployees]);
 
-    const pieOptions = {
+    const pieOptions = useMemo(() => ({
         plugins: {
             datalabels: {
                 color: "#fff",
@@ -106,14 +111,14 @@ export default function Reports() {
                 },
             },
         },
-    };
+    }), []);
 
     return (
         <MainLayout>
             <div className="container-fluid">
                 <div className="mb-4">
                     <h2 className="reports-title">Reports Dashboard</h2>
-                    <p className="reports-subtitles">Insights and analytics of your HRMS data.</p>
+                    <p className="reports-subtitle">Insights and analytics of your HRMS data.</p>
                 </div>
 
                 {/*Summary cards*/}
@@ -167,8 +172,8 @@ export default function Reports() {
                     </div>
 
                     <div className="col-md-6 mb-4">
-                        <div className="card p-4 shadow-sm">
-                            <h5 className="mb-3">Employee Status</h5>
+                        <div className="chart-card">
+                            <h5 className="chart-title">Employee Status</h5>
                             <div style={{ height: "300px" }}>
                                 <Doughnut data={statusData} options={pieOptions} />
                             </div>

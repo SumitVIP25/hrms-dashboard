@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import MainLayout from "../layout/MainLayout"
 import "../CSS/Tables.css";
+import "../CSS/Attendance.css";
 
 export default function Attendance() {
     const [attendance, setAttendance] = useState([]);
@@ -42,64 +43,69 @@ export default function Attendance() {
     return (
         <MainLayout>
             <div className="container-fluid">
-                <h3 className="mb-4">Attendance</h3>
+                <div className="mb-4">
+                    <h3 className="attendance-title">Attendance Management</h3>
+                    <p className="attendance-subtitle">Track employee attendance and monitor workforce presence.</p>
+                </div>
 
-                <div className="row mb-3">
-                    <div className="col-md-4">
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Search employee..."
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                        />
-                    </div>
+                <div className="attendance-filter-card mb-4">
+                    <div className="row">
+                        <div className="col-md-4">
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Search employee..."
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
+                        </div>
 
-                    <div className="col-md-3">
-                        <select
-                            className="form-select"
-                            value={statusFilter}
-                            onChange={(e) => setStatusFilter(e.target.value)}>
-                            <option value="All">All</option>
-                            <option value="Present">Present</option>
-                            <option value="Absent">Absent</option>
-                            <option value="Leave">Leave</option>
-                            <option value="Not Marked">Not Marked</option>
-                        </select>
+                        <div className="col-md-3">
+                            <select
+                                className="form-select"
+                                value={statusFilter}
+                                onChange={(e) => setStatusFilter(e.target.value)}>
+                                <option value="All">All</option>
+                                <option value="Present">Present</option>
+                                <option value="Absent">Absent</option>
+                                <option value="Leave">Leave</option>
+                                <option value="Not Marked">Not Marked</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
                 <div className="row mb-4">
 
                     <div className="col-md-3">
-                        <div className="card p-3">
+                        <div className="attendance-card attendance-green">
                             <h6>Present</h6>
                             <h3>{presentCount}</h3>
                         </div>
                     </div>
 
                     <div className="col-md-3">
-                        <div className="card p-3">
+                        <div className="attendance-card attendance-red">
                             <h6>Absent</h6>
                             <h3>{absentCount}</h3>
                         </div>
                     </div>
 
                     <div className="col-md-3">
-                        <div className="card p-3">
+                        <div className="attendance-card attendance-yellow">
                             <h6>Leave</h6>
                             <h3>{leaveCount}</h3>
                         </div>
                     </div>
 
                     <div className="col-md-3">
-                        <div className="card p-3">
+                        <div className="attendance-card attendance-blue">
                             <h6>Not Marked</h6>
                             <h3>{notMarkedCount}</h3>
                         </div>
                     </div>
                 </div>
-                <p>Total Employees: {employees.length}</p>
+                <p className="attendance-total">Total Employees: <strong>{employees.length}</strong></p>
                 <div className="table-card p-4">
                     <div className="table-wrapper" style={{ minHeight: "500px" }}>
                         <table className="table custom-table">

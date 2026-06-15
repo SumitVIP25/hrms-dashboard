@@ -1,0 +1,36 @@
+.employee-page-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 6px;
+}
+
+.employee-page-subtitle {
+    color: #6b7280;
+    margin-bottom: 0;
+}
+
+.employee-form-card,
+.employee-search-card,
+.employee-details-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: none;
+}
+
+.form-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 20px;
+}
+
+.employee-form-card:hover,
+.employee-search-card:hover,
+.employee-details-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease;
+}

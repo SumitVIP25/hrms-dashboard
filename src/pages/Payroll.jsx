@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import MainLayout from "../layout/MainLayout";
 import "../CSS/Tables.css";
+import "../CSS/Payroll.css";
 
 export default function Payroll() {
 
@@ -94,121 +95,159 @@ export default function Payroll() {
 
     return (
         <MainLayout>
-            <div className="card p-4">
-                <div className="row g-3">
-                    <div className="col-md-4">
-                        <label className="form-label">
-                            Employee
-                        </label>
+            <div className="container-fluid">
+                <div className="mb-4">
+                    <h2 className="payroll-title">Payroll Management</h2>
+                    <p className="payroll-subtitle">Manage employee salaries and payroll records.</p>
+                </div>
 
-                        <select
-                            className="form-select"
-                            value={employeeId}
-                            onChange={(e) => setEmployeeId(e.target.value)
-                            }>
-                            <option value="">
-                                Select Employee
-                            </option>
-
-
-                            {employees.map((employee) => (
-                                <option key={employee.id}
-                                    value={employee.id}
-                                >
-                                    {employee.name}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-
+                <div className="row mb-4">
 
                     <div className="col-md-4">
-                        <label className="form-label">
-                            Basic Salary
-                        </label>
-
-                        <input
-                            type="number"
-                            className="form-control"
-                            placeholder="Enter Basic Salary"
-                            value={basicSalary}
-                            onChange={(e) => setBasicSalary(e.target.value)}
-                        />
-
+                        <div className="payroll-card payroll-blue">
+                            <h6>Total Payroll Records</h6>
+                            <h3>{payrolls.length}</h3>
+                        </div>
                     </div>
 
                     <div className="col-md-4">
-                        <label className="form-label">
-                            Bonus
-                        </label>
-
-                        <input
-                            type="number"
-                            className="form-control"
-                            placeholder="Enter Bonus Amount"
-                            value={bonus}
-                            onChange={(e) => setBonus(e.target.value)}
-                        />
-
+                        <div className="payroll-card payroll-green">
+                            <h6>Total Salary Paid</h6>
+                            <h3>
+                                ₹ {payrolls.reduce((sum, payroll) => sum + payroll.totalSalary, 0)}
+                            </h3>
+                        </div>
                     </div>
 
-                    <div className="col-md-12 text-end">
-                        <button className="btn btn-primary"
-                            onClick={handleAddPayroll}>{editPayrollId ? "Updated Payroll" : "Add Payroll"}</button>
+                    <div className="col-md-4">
+                        <div className="payroll-card payroll-purple">
+                            <h6>Average Salary</h6>
+                            <h3>
+                                ₹ {
+                                    payrolls.length > 0 ? Math.round(payrolls.reduce((sum, payroll) => sum + payroll.totalSalary, 0) / payrolls.length) : 0
+                                }
+                            </h3>
+                        </div>
                     </div>
                 </div>
 
-            </div>
+                <h4 className="payroll-section-title">Generate Payroll</h4>
+                <div className="payroll-form-card">
+                    <div className="row g-3">
+                        <div className="col-md-4">
+                            <label className="form-label">
+                                Employee
+                            </label>
 
-            <div className="table-card p-4 mt-4">
-                <h4 className="mb-4">Payroll Records</h4>
+                            <select
+                                className="form-select"
+                                value={employeeId}
+                                onChange={(e) => setEmployeeId(e.target.value)
+                                }>
+                                <option value="">
+                                    Select Employee
+                                </option>
 
-                <div className="table-wrapper">
-                    <table className="table custom-table align-middle">
-                        <thead>
-                            <tr>
-                                <th>S.No.</th>
-                                <th>Employee</th>
-                                <th>Basic Salary</th>
-                                <th>Bonus</th>
-                                <th>Total Salary</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
 
-                        <tbody>
-                            {payrolls.length > 0 ? (
-                                payrolls.map((payroll, index) => (
-                                    <tr key={payroll.id}>
-                                        <td>{index + 1}</td>
-                                        <td>{payroll.employeeName}</td>
-                                        <td>₹{payroll.basicSalary}</td>
-                                        <td>₹{payroll.bonus}</td>
-                                        <td><strong>₹{payroll.totalSalary}</strong></td>
+                                {employees.map((employee) => (
+                                    <option key={employee.id}
+                                        value={employee.id}
+                                    >
+                                        {employee.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
 
-                                        <td>
-                                            <button className="btn btn-warning btn-sm me-2"
-                                                onClick={() => handleEditPayroll(payroll)}
-                                            >Edit</button>
 
-                                            <button className="btn btn-danger btn-sm"
-                                                onClick={() => handleDeletePayroll(payroll.id)}
-                                            >Delete</button>
+                        <div className="col-md-4">
+                            <label className="form-label">
+                                Basic Salary
+                            </label>
+
+                            <input
+                                type="number"
+                                className="form-control"
+                                placeholder="Enter Basic Salary"
+                                value={basicSalary}
+                                onChange={(e) => setBasicSalary(e.target.value)}
+                            />
+
+                        </div>
+
+                        <div className="col-md-4">
+                            <label className="form-label">
+                                Bonus
+                            </label>
+
+                            <input
+                                type="number"
+                                className="form-control"
+                                placeholder="Enter Bonus Amount"
+                                value={bonus}
+                                onChange={(e) => setBonus(e.target.value)}
+                            />
+
+                        </div>
+
+                        <div className="col-md-12 text-end">
+                            <button className="btn btn-primary"
+                                onClick={handleAddPayroll}>{editPayrollId ? "Updated Payroll" : "Add Payroll"}</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div className="payroll-table-card mt-4">
+                    <h4 className="payroll-section-title">Payroll Records</h4>
+
+                    <div className="table-wrapper">
+                        <table className="table custom-table align-middle">
+                            <thead>
+                                <tr>
+                                    <th>S.No.</th>
+                                    <th>Employee</th>
+                                    <th>Basic Salary</th>
+                                    <th>Bonus</th>
+                                    <th>Total Salary</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {payrolls.length > 0 ? (
+                                    payrolls.map((payroll, index) => (
+                                        <tr key={payroll.id}>
+                                            <td>{index + 1}</td>
+                                            <td>{payroll.employeeName}</td>
+                                            <td>₹{payroll.basicSalary}</td>
+                                            <td>₹{payroll.bonus}</td>
+                                            <td><strong>₹{payroll.totalSalary}</strong></td>
+
+                                            <td>
+                                                <button className="payroll-btn payroll-edit"
+                                                    onClick={() => handleEditPayroll(payroll)}
+                                                >Edit</button>
+
+                                                <button className="payroll-btn payroll-delete"
+                                                    onClick={() => handleDeletePayroll(payroll.id)}
+                                                >Delete</button>
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td
+                                            colSpan="5"
+                                            className="text-center text-muted"
+                                        >
+                                            No payroll records found.
                                         </td>
                                     </tr>
-                                ))
-                            ) : (
-                                <tr>
-                                    <td
-                                        colSpan="5"
-                                        className="text-center text-muted"
-                                    >
-                                        No payroll records found.
-                                    </td>
-                                </tr>
-                            )}
-                        </tbody>
-                    </table>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </MainLayout>

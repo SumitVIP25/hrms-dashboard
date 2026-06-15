@@ -1,0 +1,80 @@
+.payroll-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 6px;
+}
+
+.payroll-subtitle {
+    color: #6b7280;
+}
+
+.payroll-card,
+.payroll-form-card,
+.payroll-table-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.payroll-card:hover,
+.payroll-form-card:hover,
+.payroll-table-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.payroll-card h6 {
+    font-weight: 600;
+}
+
+.payroll-card h3 {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.payroll-blue {
+    background: #eff6ff;
+}
+
+.payroll-green {
+    background: #ecfdf5;
+}
+
+.payroll-purple {
+    background: #f5f3ff;
+}
+
+.payroll-section-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 20px;
+}
+
+.payroll-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.payroll-edit {
+    background: #fef3c7;
+    color: #b45309;
+    margin-right: 8px;
+}
+
+.payroll-delete {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.payroll-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}

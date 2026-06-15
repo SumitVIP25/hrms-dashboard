@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import MainLayout from "../layout/MainLayout";
 import "../CSS/Tables.css";
+import "../CSS/Leave.css";
 
 export default function Leave() {
     const [leaveRequests, setLeaveRequests] = useState([]);
@@ -85,33 +86,36 @@ export default function Leave() {
     return (
         <MainLayout>
             <div className="container">
-                <h3 className="mb-4">Leave Management Page</h3>
+                <div className="mb-4">
+                    <h2 className="mb-4">Leave Management</h2>
+                    <p className="leave-subtitle">Manage employee leave requests and approvals efficiently.</p>
+                </div>
 
                 <div className="row mb-4">
                     <div className="col-md-4">
-                        <div className="card p-3">
+                        <div className="leave-card leave-yellow">
                             <h6>Pending</h6>
                             <h3>{pendingCount}</h3>
                         </div>
                     </div>
 
                     <div className="col-md-4">
-                        <div className="card p-3">
+                        <div className="leave-card leave-green">
                             <h6>Approved</h6>
                             <h3>{approvedCount}</h3>
                         </div>
                     </div>
 
                     <div className="col-md-4">
-                        <div className="card p-3">
+                        <div className="leave-card leave-red">
                             <h6>Rejected</h6>
                             <h3>{rejectedCount}</h3>
                         </div>
                     </div>
                 </div>
 
-                <div className="card p-4">
-                    <h4 className="mb-3">Apply Leaves</h4>
+                <div className="leave-form-card">
+                    <h4 className="leave-section-title">Apply Leaves</h4>
 
                     <div className="row g-3">
                         <div className="col-md-6">
@@ -182,8 +186,8 @@ export default function Leave() {
                 </div>
 
 
-                <div className="table-card p-4 mt-4">
-                    <h4 className="mb-3">Leave Requests</h4>
+                <div className="leave-table-card mt-4">
+                    <h4 className="leave-section-title">Leave Requests</h4>
 
                     <table className="table custom-table align-middle">
                         <thead>
@@ -207,24 +211,24 @@ export default function Leave() {
                                     <td>{leave.fromDate}</td>
                                     <td>{leave.toDate}</td>
                                     <td>
-                                        <span className={`badge ${leave.status === "Approved"
-                                            ? "bg-success"
-                                            : leave.status === "Rejected"
-                                                ? "bg-danger"
-                                                : "bg-warning"
-                                            }`}
+                                        <span className={
+                                            leave.status === "Approved"
+                                                ? "leave-status approved"
+                                                : leave.status === "Rejected"
+                                                    ? "leave-status rejected"
+                                                    : "leave-status pending"}
                                         >
                                             {leave.status}
                                         </span>
                                     </td>
 
                                     <td>
-                                        <button className="btn btn-success btn-sm me-2"
+                                        <button className="leave-btn leave-approve"
                                             onClick={() => handleLeaveStatus(leave.id, "Approved")}
                                         >Approved
                                         </button>
 
-                                        <button className="btn btn-danger btn-sm"
+                                        <button className="leave-btn leave-reject"
                                             onClick={() => handleLeaveStatus(leave.id, "Rejected")}
                                         >Rejected</button>
                                     </td>

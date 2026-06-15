@@ -1,6 +1,7 @@
 import MainLayout from "../layout/MainLayout";
 import { useEffect, useState } from "react";
 import "../CSS/Tables.css";
+import "../CSS/Employees.css";
 
 
 
@@ -194,12 +195,16 @@ export default function Employees() {
     return (
         <MainLayout>
             <div className="container-fluid">
+                <div className="mb-4">
+                    <h2 className="employee-page-title">Employee Management</h2>
+                    <p className="employee-page-subtitle">Manage employees, monitor status, and maintain workforce records.</p>
+                </div>
                 <button className="btn btn-success mt-2 mb-2" onClick={handleSort}>
                     Sort by Name
                 </button>
 
-                <div className="card p-4 mb-4">
-                    <h4 className="mb-3">{editId !== null ? "Edit Employee" : "Add Employee"}</h4>
+                <div className="employee-form-card">
+                    <h4 className="form-title">{editId !== null ? "Edit Employee" : "Add Employee"}</h4>
 
                     <div className="row g-3">
                         <div className="col-md-3">
@@ -278,8 +283,8 @@ export default function Employees() {
                     </div>
                 </div>
 
-                <div className="card p-4 mb-4">
-                    <h4 className="mb-3">Search Employees</h4>
+                <div className="employee-search-card">
+                    <h4 className="form-title">Search Employees</h4>
 
                     <div className="row g-3 mx-0">
                         <div className="col-md-6 px-0">
@@ -313,8 +318,8 @@ export default function Employees() {
                 </div>
 
                 {selectedEmployee && (
-                    <div className="card p-4 mb-4 shadow">
-                        <h4 className="mb-3">Employee Details</h4>
+                    <div className="employee-details-card">
+                        <h4 className="form-title">Employee Details</h4>
                         <p>
                             <strong>ID:</strong> {selectedEmployee.id} <br />
                         </p>

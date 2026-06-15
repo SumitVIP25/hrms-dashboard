@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import "../CSS/Sidebar.css";
-import { FaTachometerAlt, FaUsers, FaCalendarCheck, FaClipboardList, FaMoneyCheckAlt, FaChartPie, FaCog, } from "react-icons/fa";
 
 
 

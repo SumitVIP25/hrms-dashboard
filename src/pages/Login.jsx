@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import InputField from "../components/inputField";
 import "../CSS/Login.css";
@@ -8,6 +8,16 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!localStorage.getItem("userEmail")) {
+            localStorage.setItem("userEmail", "admin@hrms.com");
+        }
+
+        if (!localStorage.getItem("userPassword")) {
+            localStorage.setItem("userPassword", "admin123");
+        }
+    }, []);
 
 
     const handleSubmit = (e) => {
