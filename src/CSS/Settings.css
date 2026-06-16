@@ -86,3 +86,104 @@
 
     transform: translateY(-2px);
 }
+
+/* ====================================
+   TABLETS (600px–767px)
+==================================== */
+
+@media (max-width: 767px) {
+
+    .settings-title {
+        font-size: 1.8rem;
+    }
+
+    .settings-subtitle {
+        font-size: 14px;
+    }
+
+    .settings-card {
+        padding: 22px;
+    }
+
+    .settings-card-title {
+        font-size: 20px;
+    }
+}
+
+/* ====================================
+   LARGE PHONES (375px–480px)
+==================================== */
+
+@media (max-width: 480px) {
+
+    .settings-title {
+        font-size: 1.6rem;
+    }
+
+    .settings-subtitle {
+        font-size: 13px;
+    }
+
+    .settings-card {
+        padding: 18px;
+        border-radius: 16px;
+    }
+
+    .settings-card-title {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .settings-card p {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .settings-input {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .settings-btn {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+/* ====================================
+   SMALL PHONES (320px–360px)
+==================================== */
+
+@media (max-width: 360px) {
+
+    .settings-title {
+        font-size: 1.4rem;
+    }
+
+    .settings-subtitle {
+        font-size: 12px;
+    }
+
+    .settings-card {
+        padding: 15px;
+        border-radius: 14px;
+    }
+
+    .settings-card-title {
+        font-size: 17px;
+    }
+
+    .settings-card p {
+        font-size: 13px;
+    }
+
+    .settings-input {
+        font-size: 13px;
+        padding: 9px;
+    }
+
+    .settings-btn {
+        font-size: 13px;
+        padding: 9px;
+    }
+}

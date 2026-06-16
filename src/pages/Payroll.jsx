@@ -101,7 +101,7 @@ export default function Payroll() {
                     <p className="payroll-subtitle">Manage employee salaries and payroll records.</p>
                 </div>
 
-                <div className="row mb-4">
+                <div className="row g-3 mb-4">
 
                     <div className="col-md-4">
                         <div className="payroll-card payroll-blue">
@@ -134,7 +134,7 @@ export default function Payroll() {
                 <h4 className="payroll-section-title">Generate Payroll</h4>
                 <div className="payroll-form-card">
                     <div className="row g-3">
-                        <div className="col-md-4">
+                        <div className="col-12 col-sm-6 col-md-4">
                             <label className="form-label">
                                 Employee
                             </label>
@@ -160,7 +160,7 @@ export default function Payroll() {
                         </div>
 
 
-                        <div className="col-md-4">
+                        <div className="col-12 col-sm-6 col-md-4">
                             <label className="form-label">
                                 Basic Salary
                             </label>
@@ -175,7 +175,7 @@ export default function Payroll() {
 
                         </div>
 
-                        <div className="col-md-4">
+                        <div className="col-12 col-sm-6 col-md-4">
                             <label className="form-label">
                                 Bonus
                             </label>
@@ -190,7 +190,7 @@ export default function Payroll() {
 
                         </div>
 
-                        <div className="col-md-12 text-end">
+                        <div className="col-12 text-end">
                             <button className="btn btn-primary"
                                 onClick={handleAddPayroll}>{editPayrollId ? "Updated Payroll" : "Add Payroll"}</button>
                         </div>

@@ -1,0 +1,23 @@
+/* Mobile overlay */
+
+.sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 998;
+}
+
+/* Main content spacing */
+
+.main-content {
+    overflow-x: hidden;
+}
+
+/* Mobile */
+
+@media (max-width: 767px) {
+
+    .main-content {
+        padding: 15px !important;
+    }
+}

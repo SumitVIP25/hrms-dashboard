@@ -50,10 +50,10 @@ export default function Settings() {
                     </p>
                 </div>
 
-                <div className="row">
+                <div className="row g-3">
 
                     {/* profile information */}
-                    <div className="col-md-4 mb-4">
+                    <div className="col-12 col-sm-6 col-lg-4">
                         <div className="settings-card settings-blue">
                             <h4 className="settings-card-title">Profile Information</h4>
                             <p>
@@ -71,7 +71,7 @@ export default function Settings() {
                     </div>
 
                     {/*Change Password */}
-                    <div className="col-md-4 mb-4">
+                    <div className="col-12 col-sm-6 col-lg-4">
                         <div className="settings-card settings-green">
                             <h4 className="settings-card-title">Change Password</h4>
                             <input
@@ -106,7 +106,7 @@ export default function Settings() {
                     </div>
 
                     {/* System Information */}
-                    <div className="col-md-4 mb-4">
+                    <div className="col-12 col-sm-6 col-lg-4">
                         <div className="settings-card settings-purple">
                             <h4 className="settings-card-title">System Information</h4>
                             <p>

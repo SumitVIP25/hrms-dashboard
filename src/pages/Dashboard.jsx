@@ -34,22 +34,22 @@ export default function Dashboard() {
             <div className="mb-4">
                 <h3 className="dashboard-section-title">Dashboard Overview</h3>
             </div>
-            <div className="row">
-                <div className="col-md-4 mb-3">
+            <div className="row g-3">
+                <div className="col-6 col-md-4 mb-3">
                     <div className="dashboard-card card-blue">
                         <h6 className="dashboard-title">Total Employees</h6>
                         <h3 className="dashboard-number">{employees.length}</h3>
                     </div>
                 </div>
 
-                <div className="col-md-4">
+                <div className="col-6 col-md-4 mb-3">
                     <div className="dashboard-card card-green">
                         <h6 className="dashboard-title">Active Employees</h6>
                         <h3 className="dashboard-number">{activeEmployees}</h3>
                     </div>
                 </div>
 
-                <div className="col-md-4">
+                <div className="col-6 col-md-4 mb-3">
                     <div className="dashboard-card card-red">
                         <h6 className="dashboard-title">Inactive Employees</h6>
                         <h3 className="dashboard-number">{inactiveEmployees}</h3>
@@ -57,29 +57,29 @@ export default function Dashboard() {
                 </div>
             </div>
 
-            <div className="row mt-4">
-                <div className="col-md-3 mb-3">
+            <div className="row g-3 mt-4">
+                <div className="col-6 col-md-3 mb-3">
                     <div className="dashboard-card card-purple h-100">
                         <h6 className="dashboard-title">IT Department</h6>
                         <h3 className="dashboard-number">{itEmployees}</h3>
                     </div>
                 </div>
 
-                <div className="col-md-3 mb-3">
+                <div className="col-6 col-md-3 mb-3">
                     <div className="dashboard-card card-pink h-100">
                         <h6 className="dashboard-title">HR Department</h6>
                         <h3 className="dashboard-number">{hrEmployees}</h3>
                     </div>
                 </div>
 
-                <div className="col-md-3 mb-3">
+                <div className="col-6 col-md-3 mb-3">
                     <div className="dashboard-card card-yellow h-100">
                         <h6 className="dashboard-title">Sales Department</h6>
                         <h3 className="dashboard-number">{salesEmployees}</h3>
                     </div>
                 </div>
 
-                <div className="col-md-3 mb-3">
+                <div className="col-6 col-md-3 mb-3">
                     <div className="dashboard-card card-teal h-100">
                         <h6 className="dashboard-title">Finance Department</h6>
                         <h3 className="dashboard-number">{financeEmployees}</h3>

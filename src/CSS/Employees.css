@@ -34,3 +34,147 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     transition: all 0.3s ease;
 }
+
+/* ===============================
+   MOBILE RESPONSIVENESS
+================================ */
+
+/* Table */
+
+.table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.custom-table {
+    min-width: 1000px;
+}
+
+/* Action Buttons */
+
+.action-buttons {
+    white-space: nowrap;
+}
+
+.action-buttons .btn {
+    margin-bottom: 5px;
+}
+
+/* Employee Cards */
+
+.employee-form-card,
+.employee-search-card,
+.employee-details-card {
+    overflow: hidden;
+}
+
+/* ===============================
+   TABLETS (600px–767px)
+================================ */
+
+@media (max-width: 767px) {
+
+    .employee-page-title {
+        font-size: 26px;
+    }
+
+    .employee-page-subtitle {
+        font-size: 14px;
+    }
+
+    .employee-form-card,
+    .employee-search-card,
+    .employee-details-card {
+        padding: 22px;
+    }
+
+    .form-title {
+        font-size: 20px;
+    }
+
+    .employee-form-card .btn,
+    .employee-search-card .btn {
+        width: 100%;
+    }
+}
+
+
+/* ===============================
+   LARGE PHONES (375–480px)
+================================ */
+
+@media (max-width: 480px) {
+
+    .employee-page-title {
+        font-size: 24px;
+    }
+
+    .employee-page-subtitle {
+        font-size: 13px;
+    }
+
+    .employee-form-card,
+    .employee-search-card,
+    .employee-details-card {
+        padding: 18px;
+        border-radius: 14px;
+    }
+
+    .form-title {
+        font-size: 18px;
+    }
+
+    .employee-form-card .row,
+    .employee-search-card .row {
+        row-gap: 12px;
+    }
+
+    .employee-form-card .btn,
+    .employee-search-card .btn {
+        width: 100%;
+    }
+
+    .custom-table {
+        font-size: 13px;
+    }
+
+    .custom-table .btn {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}
+
+
+/* ===============================
+   SMALL PHONES (320–360px)
+================================ */
+
+@media (max-width: 360px) {
+
+    .employee-page-title {
+        font-size: 22px;
+    }
+
+    .employee-page-subtitle {
+        font-size: 12px;
+    }
+
+    .employee-form-card,
+    .employee-search-card,
+    .employee-details-card {
+        padding: 15px;
+    }
+
+    .form-title {
+        font-size: 17px;
+    }
+
+    .custom-table {
+        font-size: 12px;
+    }
+
+    .custom-table .btn {
+        font-size: 11px;
+        padding: 5px 8px;
+    }
+}

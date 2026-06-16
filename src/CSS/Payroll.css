@@ -78,3 +78,194 @@
     transform: translateY(-2px);
     opacity: 0.9;
 }
+
+/* ===================================
+   RESPONSIVE DESIGN
+=================================== */
+
+/* Tables */
+
+.payroll-table-card {
+    overflow: hidden;
+}
+
+.payroll-table-card .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.payroll-table-card table {
+    min-width: 700px;
+}
+
+/* Buttons */
+
+.payroll-table-card .btn,
+.payroll-btn {
+    white-space: nowrap;
+}
+
+/* ===================================
+   TABLETS (600–767px)
+=================================== */
+
+@media (max-width: 767px) {
+
+    .payroll-title {
+        font-size: 26px;
+    }
+
+    .payroll-subtitle {
+        font-size: 14px;
+    }
+
+    .payroll-card,
+    .payroll-form-card,
+    .payroll-table-card {
+        padding: 20px;
+    }
+
+    .payroll-section-title {
+        font-size: 20px;
+    }
+
+    .payroll-card h3 {
+        font-size: 26px;
+    }
+
+    .payroll-form-card .btn {
+        width: 100%;
+    }
+}
+
+
+/* ===================================
+   LARGE PHONES (375–480px)
+=================================== */
+
+@media (max-width: 480px) {
+
+    .payroll-title {
+        font-size: 24px;
+    }
+
+    .payroll-subtitle {
+        font-size: 13px;
+    }
+
+    .payroll-card,
+    .payroll-form-card,
+    .payroll-table-card {
+        padding: 18px;
+        border-radius: 14px;
+    }
+
+    .payroll-card {
+        margin-bottom: 15px;
+    }
+
+    .payroll-card h6 {
+        font-size: 14px;
+    }
+
+    .payroll-card h3 {
+        font-size: 24px;
+    }
+
+    .payroll-section-title {
+        font-size: 18px;
+    }
+
+    .payroll-form-card .row {
+        row-gap: 12px;
+    }
+
+    .payroll-form-card .btn {
+        width: 100%;
+    }
+
+    .payroll-table-card table {
+        font-size: 13px;
+    }
+
+    .payroll-table-card .btn,
+    .payroll-btn {
+        font-size: 12px;
+        padding: 6px 10px;
+        margin-bottom: 5px;
+    }
+}
+
+
+/* ===================================
+   SMALL PHONES (320–360px)
+=================================== */
+
+@media (max-width: 360px) {
+
+    .payroll-title {
+        font-size: 22px;
+    }
+
+    .payroll-subtitle {
+        font-size: 12px;
+    }
+
+    .payroll-card,
+    .payroll-form-card,
+    .payroll-table-card {
+        padding: 15px;
+    }
+
+    .payroll-section-title {
+        font-size: 17px;
+    }
+
+    .payroll-card h6 {
+        font-size: 13px;
+    }
+
+    .payroll-card h3 {
+        font-size: 22px;
+    }
+
+    .payroll-table-card table {
+        font-size: 12px;
+    }
+
+    .payroll-table-card .btn,
+    .payroll-btn {
+        font-size: 11px;
+        padding: 5px 8px;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 767px) {
+
+    .row {
+        row-gap: 16px;
+    }
+
+    .payroll-card {
+        margin-bottom: 0;
+    }
+
+    .payroll-form-card .row {
+        row-gap: 16px;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 767px) {
+
+    .payroll-card,
+    .leave-card,
+    .attendance-card,
+    .dashboard-card {
+        height: 100%;
+    }
+
+    .col-sm-6 {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+}

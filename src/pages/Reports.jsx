@@ -122,8 +122,8 @@ export default function Reports() {
                 </div>
 
                 {/*Summary cards*/}
-                <div className="row mb-4">
-                    <div className="col-md-2">
+                <div className="row g-3 mb-4">
+                    <div className="col-6 col-md-2">
                         <div className="report-card report-blue">
                             <h6>Total Employees</h6>
                             <h3>{totalEmployees}</h3>
@@ -131,28 +131,28 @@ export default function Reports() {
                     </div>
 
 
-                    <div className="col-md-2">
+                    <div className="col-6 col-md-2">
                         <div className="report-card report-green">
                             <h6>Active</h6>
                             <h3>{activeEmployees}</h3>
                         </div>
                     </div>
 
-                    <div className="col-md-2">
+                    <div className="col-6 col-md-2">
                         <div className="report-card report-red">
                             <h6>Inactive</h6>
                             <h3>{inactiveEmployees}</h3>
                         </div>
                     </div>
 
-                    <div className="col-md-3">
+                    <div className="col-6 col-md-3">
                         <div className="report-card report-purple">
                             <h6>Payroll Records</h6>
                             <h3>{totalPayrolls}</h3>
                         </div>
                     </div>
 
-                    <div className="col-md-3">
+                    <div className="col-6 col-md-3">
                         <div className="report-card report-yellow">
                             <h6>Leave Requests</h6>
                             <h3>{totalLeaves}</h3>
@@ -162,20 +162,28 @@ export default function Reports() {
 
                 {/* Charts */}
                 <div className="row">
-                    <div className="col-md-6 mb-4">
+                    <div className="col-12 col-md-6 mb-4">
                         <div className="chart-card">
                             <h5 className="chart-title">Employees by Department</h5>
-                            <div style={{ height: "300px" }}>
-                                <Pie data={departmentData} options={pieOptions} />
+                            <div className="chart-container">
+                                <Pie data={departmentData}
+                                    options={{
+                                        ...pieOptions,
+                                        maintainAspectRatio: false,
+                                    }} />
                             </div>
                         </div>
                     </div>
 
-                    <div className="col-md-6 mb-4">
+                    <div className="col-12 col-md-6 mb-4">
                         <div className="chart-card">
                             <h5 className="chart-title">Employee Status</h5>
-                            <div style={{ height: "300px" }}>
-                                <Doughnut data={statusData} options={pieOptions} />
+                            <div className="chart-container">
+                                <Doughnut data={statusData}
+                                    options={{
+                                        ...pieOptions,
+                                        maintainAspectRatio: false,
+                                    }} />
                             </div>
                         </div>
                     </div>

@@ -50,7 +50,7 @@ export default function Attendance() {
 
                 <div className="attendance-filter-card mb-4">
                     <div className="row">
-                        <div className="col-md-4">
+                        <div className="col-12 col-md-4 mb-2">
                             <input
                                 type="text"
                                 className="form-control"
@@ -60,7 +60,7 @@ export default function Attendance() {
                             />
                         </div>
 
-                        <div className="col-md-3">
+                        <div className="col-12 col-md-3 mb-2">
                             <select
                                 className="form-select"
                                 value={statusFilter}
@@ -77,28 +77,28 @@ export default function Attendance() {
 
                 <div className="row mb-4">
 
-                    <div className="col-md-3">
+                    <div className="col-6 col-md-3 mb-3">
                         <div className="attendance-card attendance-green">
                             <h6>Present</h6>
                             <h3>{presentCount}</h3>
                         </div>
                     </div>
 
-                    <div className="col-md-3">
+                    <div className="col-6 col-md-3 mb-3">
                         <div className="attendance-card attendance-red">
                             <h6>Absent</h6>
                             <h3>{absentCount}</h3>
                         </div>
                     </div>
 
-                    <div className="col-md-3">
+                    <div className="col-6 col-md-3 mb-3">
                         <div className="attendance-card attendance-yellow">
                             <h6>Leave</h6>
                             <h3>{leaveCount}</h3>
                         </div>
                     </div>
 
-                    <div className="col-md-3">
+                    <div className="col-6 col-md-3 mb-3">
                         <div className="attendance-card attendance-blue">
                             <h6>Not Marked</h6>
                             <h3>{notMarkedCount}</h3>
@@ -140,15 +140,15 @@ export default function Attendance() {
                                             </span>
                                             </td>
 
-                                            <td className="text-nowrap">
+                                            <td className="d-flex flex-column flex-md-row gap-1">
 
-                                                <button className="btn btn-success btn-sm me-2"
+                                                <button className="btn btn-success btn-sm attendance-btn"
                                                     onClick={() => handleAttendenceStatus(employee.id, "Present")}>Present</button>
 
-                                                <button className="btn btn-danger btn-sm me-2"
+                                                <button className="btn btn-danger btn-sm attendance-btn"
                                                     onClick={() => handleAttendenceStatus(employee.id, "Absent")}>Absent</button>
 
-                                                <button className="btn btn-warning btn-sm"
+                                                <button className="btn btn-warning btn-sm attendance-btn"
                                                     onClick={() => handleAttendenceStatus(employee.id, "Leave")}>Leave</button>
 
                                             </td>

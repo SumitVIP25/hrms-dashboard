@@ -100,3 +100,166 @@
     transform: translateY(-2px);
     opacity: 0.9;
 }
+
+/* ===================================
+   RESPONSIVE DESIGN
+=================================== */
+
+/* Tables */
+
+.leave-table-card {
+    overflow: hidden;
+}
+
+.leave-table-card .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.leave-table-card table {
+    min-width: 750px;
+}
+
+/* Buttons */
+
+.leave-table-card .btn {
+    white-space: nowrap;
+}
+
+/* ===================================
+   TABLETS (600–767px)
+=================================== */
+
+@media (max-width: 767px) {
+
+    .leave-title {
+        font-size: 26px;
+    }
+
+    .leave-subtitle {
+        font-size: 14px;
+    }
+
+    .leave-card,
+    .leave-form-card,
+    .leave-table-card {
+        padding: 20px;
+    }
+
+    .leave-section-title {
+        font-size: 20px;
+    }
+
+    .leave-card h3 {
+        font-size: 28px;
+    }
+
+    .leave-form-card .btn {
+        width: 100%;
+    }
+}
+
+
+/* ===================================
+   LARGE PHONES (375–480px)
+=================================== */
+
+@media (max-width: 480px) {
+
+    .leave-title {
+        font-size: 24px;
+    }
+
+    .leave-subtitle {
+        font-size: 13px;
+    }
+
+    .leave-card,
+    .leave-form-card,
+    .leave-table-card {
+        padding: 18px;
+        border-radius: 14px;
+    }
+
+    .leave-card {
+        margin-bottom: 15px;
+    }
+
+    .leave-card h6 {
+        font-size: 14px;
+    }
+
+    .leave-card h3 {
+        font-size: 24px;
+    }
+
+    .leave-section-title {
+        font-size: 18px;
+    }
+
+    .leave-form-card .row {
+        row-gap: 12px;
+    }
+
+    .leave-form-card .btn {
+        width: 100%;
+    }
+
+    .leave-table-card table {
+        font-size: 13px;
+    }
+
+    .leave-table-card .btn {
+        font-size: 12px;
+        padding: 6px 10px;
+        margin-bottom: 5px;
+    }
+}
+
+
+/* ===================================
+   SMALL PHONES (320–360px)
+=================================== */
+
+@media (max-width: 360px) {
+
+    .leave-title {
+        font-size: 22px;
+    }
+
+    .leave-subtitle {
+        font-size: 12px;
+    }
+
+    .leave-card,
+    .leave-form-card,
+    .leave-table-card {
+        padding: 15px;
+    }
+
+    .leave-section-title {
+        font-size: 17px;
+    }
+
+    .leave-card h6 {
+        font-size: 13px;
+    }
+
+    .leave-card h3 {
+        font-size: 22px;
+    }
+
+    .leave-table-card table {
+        font-size: 12px;
+    }
+
+    .leave-table-card .btn {
+        font-size: 11px;
+        padding: 5px 8px;
+    }
+
+    .leave-status {
+        font-size: 11px;
+        padding: 5px 10px;
+    }
+}

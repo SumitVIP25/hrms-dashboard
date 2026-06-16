@@ -199,15 +199,12 @@ export default function Employees() {
                     <h2 className="employee-page-title">Employee Management</h2>
                     <p className="employee-page-subtitle">Manage employees, monitor status, and maintain workforce records.</p>
                 </div>
-                <button className="btn btn-success mt-2 mb-2" onClick={handleSort}>
-                    Sort by Name
-                </button>
 
                 <div className="employee-form-card">
                     <h4 className="form-title">{editId !== null ? "Edit Employee" : "Add Employee"}</h4>
 
                     <div className="row g-3">
-                        <div className="col-md-3">
+                        <div className="col-12 col-sm-6 col-md-3">
                             <input
                                 type="text"
                                 className="form-control"
@@ -217,7 +214,7 @@ export default function Employees() {
                             />
                         </div>
 
-                        <div className="col-md-2">
+                        <div className="col-12 col-sm-6 col-md-2">
                             <input
                                 type="email"
                                 className="form-control"
@@ -227,7 +224,7 @@ export default function Employees() {
                             />
                         </div>
 
-                        <div className="col-md-2">
+                        <div className="col-12 col-sm-6 col-md-2">
                             <select
                                 className="form-select"
                                 value={department}
@@ -241,7 +238,7 @@ export default function Employees() {
                             </select>
                         </div>
 
-                        <div className="col-md-2">
+                        <div className="col-12 col-sm-6 col-md-2">
                             <select
                                 className="form-select"
                                 value={role}
@@ -256,7 +253,7 @@ export default function Employees() {
                             </select>
                         </div>
 
-                        <div className="col-md-2">
+                        <div className="col-12 col-sm-6 col-md-2">
                             <input
                                 type="date"
                                 className="form-control"
@@ -265,7 +262,7 @@ export default function Employees() {
                             />
                         </div>
 
-                        <div className="col-md-3">
+                        <div className="col-12 col-sm-6 col-md-3">
                             <div className="d-flex gap-2">
                                 <button className="btn btn-primary flex-grow-1"
                                     onClick={handleAddEmployee}>
@@ -287,7 +284,7 @@ export default function Employees() {
                     <h4 className="form-title">Search Employees</h4>
 
                     <div className="row g-3 mx-0">
-                        <div className="col-md-6 px-0">
+                        <div className="col-12 col-md-6 px-0">
                             <input
                                 type="text"
                                 className="form-control"
@@ -300,7 +297,7 @@ export default function Employees() {
                             />
                         </div>
 
-                        <div className="col-md-3">
+                        <div className="col-12 col-sm-6 col-md-3">
                             <select className="form-select"
                                 value={statusFilter}
                                 onChange={(e) => setStatusFilter(e.target.value)}>
@@ -309,7 +306,7 @@ export default function Employees() {
                                 <option value="Inactive">Inactive</option>
                             </select>
                         </div>
-                        <div className="col-md-3">
+                        <div className="col-12 col-md-3">
                             <button className="btn btn-success w-100"
                                 onClick={handleSort}>Sort By Name</button>
                         </div>
@@ -389,7 +386,7 @@ export default function Employees() {
                                                 </span>
                                             </td>
 
-                                            <td className="text-nowrap">
+                                            <td className="action-buttons">
                                                 <button className="btn btn-info btn-sm me-2"
                                                     onClick={() => handleView(employee)}>View</button>
 
@@ -400,7 +397,7 @@ export default function Employees() {
                                                     onClick={() => handleDelete(employee.id)}>Delete</button>
                                             </td>
 
-                                            <td className="text-nowrap">
+                                            <td className="action-buttons">
                                                 <button className="btn btn-primary btn-sm"
                                                     onClick={() => handleToggleStatus(employee.id)}>
                                                     Toggle Status

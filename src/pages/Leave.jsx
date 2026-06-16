@@ -91,7 +91,7 @@ export default function Leave() {
                     <p className="leave-subtitle">Manage employee leave requests and approvals efficiently.</p>
                 </div>
 
-                <div className="row mb-4">
+                <div className="row g-3 mb-4">
                     <div className="col-md-4">
                         <div className="leave-card leave-yellow">
                             <h6>Pending</h6>
@@ -189,55 +189,57 @@ export default function Leave() {
                 <div className="leave-table-card mt-4">
                     <h4 className="leave-section-title">Leave Requests</h4>
 
-                    <table className="table custom-table align-middle">
-                        <thead>
-                            <tr>
-                                <th>S.no</th>
-                                <th>Employee</th>
-                                <th>Leave Type</th>
-                                <th>From</th>
-                                <th>To</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            {leaveRequests.map((leave, index) => (
-                                <tr key={leave.id}>
-                                    <td>{index + 1}</td>
-                                    <td>{leave.employeeName}</td>
-                                    <td>{leave.leaveType}</td>
-                                    <td>{leave.fromDate}</td>
-                                    <td>{leave.toDate}</td>
-                                    <td>
-                                        <span className={
-                                            leave.status === "Approved"
-                                                ? "leave-status approved"
-                                                : leave.status === "Rejected"
-                                                    ? "leave-status rejected"
-                                                    : "leave-status pending"}
-                                        >
-                                            {leave.status}
-                                        </span>
-                                    </td>
-
-                                    <td>
-                                        <button className="leave-btn leave-approve"
-                                            onClick={() => handleLeaveStatus(leave.id, "Approved")}
-                                        >Approved
-                                        </button>
-
-                                        <button className="leave-btn leave-reject"
-                                            onClick={() => handleLeaveStatus(leave.id, "Rejected")}
-                                        >Rejected</button>
-                                    </td>
+                    <div className="table-responsive">
+                        <table className="table custom-table align-middle">
+                            <thead>
+                                <tr>
+                                    <th>S.no</th>
+                                    <th>Employee</th>
+                                    <th>Leave Type</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
-                            ))
+                            </thead>
 
-                            }
-                        </tbody>
-                    </table>
+                            <tbody>
+                                {leaveRequests.map((leave, index) => (
+                                    <tr key={leave.id}>
+                                        <td>{index + 1}</td>
+                                        <td>{leave.employeeName}</td>
+                                        <td>{leave.leaveType}</td>
+                                        <td>{leave.fromDate}</td>
+                                        <td>{leave.toDate}</td>
+                                        <td>
+                                            <span className={
+                                                leave.status === "Approved"
+                                                    ? "leave-status approved"
+                                                    : leave.status === "Rejected"
+                                                        ? "leave-status rejected"
+                                                        : "leave-status pending"}
+                                            >
+                                                {leave.status}
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            <button className="leave-btn leave-approve"
+                                                onClick={() => handleLeaveStatus(leave.id, "Approved")}
+                                            >Approved
+                                            </button>
+
+                                            <button className="leave-btn leave-reject"
+                                                onClick={() => handleLeaveStatus(leave.id, "Rejected")}
+                                            >Rejected</button>
+                                        </td>
+                                    </tr>
+                                ))
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
             </div>
