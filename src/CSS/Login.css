@@ -9,10 +9,13 @@
 }
 
 .login-card {
-    width: 420px;
+    width: 100%;
+    max-width: 420px;
+
     background: #ffffff;
     border-radius: 22px;
     padding: 40px;
+
     box-shadow: 0 15px 35px #0000001f;
 }
 
@@ -57,4 +60,79 @@
 
 .login-card a:hover {
     color: #1d4ed8;
+}
+
+/* ===================================
+   TABLETS
+=================================== */
+
+@media (max-width: 767px) {
+
+    .login-card {
+        padding: 30px;
+    }
+
+    .login-title {
+        font-size: 1.8rem;
+    }
+}
+
+
+/* ===================================
+   LARGE PHONES
+=================================== */
+
+@media (max-width: 480px) {
+
+    .login-container {
+        padding: 15px;
+    }
+
+    .login-card {
+        padding: 25px;
+        border-radius: 18px;
+    }
+
+    .login-title {
+        font-size: 1.6rem;
+    }
+
+    .login-subtitle {
+        font-size: 14px;
+    }
+
+    .login-btn {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+
+/* ===================================
+   SMALL PHONES
+=================================== */
+
+@media (max-width: 360px) {
+
+    .login-container {
+        padding: 10px;
+    }
+
+    .login-card {
+        padding: 20px;
+        border-radius: 16px;
+    }
+
+    .login-title {
+        font-size: 1.4rem;
+    }
+
+    .login-subtitle {
+        font-size: 13px;
+    }
+
+    .login-btn {
+        font-size: 13px;
+        padding: 9px;
+    }
 }

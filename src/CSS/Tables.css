@@ -130,3 +130,101 @@
         padding: 5px 8px;
     }
 }
+
+/* ===================================
+   TABLETS
+=================================== */
+
+@media (max-width: 767px) {
+
+    .table-card {
+        border-radius: 14px;
+    }
+
+    .table-wrapper {
+        max-height: 400px;
+    }
+
+    .custom-table thead th,
+    .custom-table tbody td {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .custom-table .badge {
+        font-size: 11px;
+        padding: 5px 8px;
+    }
+}
+
+/* ===================================
+   LARGE PHONES
+=================================== */
+
+@media (max-width: 480px) {
+
+    .table-card {
+        border-radius: 12px;
+    }
+
+    .custom-table thead th,
+    .custom-table tbody td {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+
+
+    .custom-table .badge {
+        font-size: 10px;
+        padding: 4px 7px;
+    }
+
+    .leave-table-card .btn {
+        min-height: 36px;
+        min-width: 80px;
+
+        font-size: 12px;
+
+        margin-bottom: 5px;
+    }
+
+    .custom-table .btn {
+
+        min-height: 36px;
+        min-width: 70px;
+
+        padding: 6px 10px;
+
+        font-size: 12px;
+
+        margin-bottom: 5px;
+    }
+}
+
+/* ===================================
+   SMALL PHONES
+=================================== */
+
+@media (max-width: 360px) {
+
+    .custom-table thead th,
+    .custom-table tbody td {
+        padding: 6px;
+        font-size: 11px;
+    }
+
+    .custom-table .btn {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+
+    .custom-table .badge {
+        font-size: 9px;
+        padding: 3px 6px;
+    }
+
+    .custom-table td .btn {
+        margin-bottom: 4px;
+    }
+}

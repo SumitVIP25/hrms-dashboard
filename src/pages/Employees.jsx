@@ -386,18 +386,18 @@ export default function Employees() {
                                                 </span>
                                             </td>
 
-                                            <td className="action-buttons">
+                                            <td className="action-buttons text-nowrap">
                                                 <button className="btn btn-info btn-sm me-2"
                                                     onClick={() => handleView(employee)}>View</button>
 
-                                                <button className="btn btn-sm btn-warning me-2"
+                                                <button className="btn btn-warning btn-sm me-2"
                                                     onClick={() => handleEdit(employee)}>Edit</button>
 
                                                 <button className="btn btn-danger btn-sm"
                                                     onClick={() => handleDelete(employee.id)}>Delete</button>
                                             </td>
 
-                                            <td className="action-buttons">
+                                            <td className="action-buttons text-nowrap">
                                                 <button className="btn btn-primary btn-sm"
                                                     onClick={() => handleToggleStatus(employee.id)}>
                                                     Toggle Status

@@ -43,21 +43,10 @@
 
 .table-wrapper {
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
 }
 
 .custom-table {
     min-width: 1000px;
-}
-
-/* Action Buttons */
-
-.action-buttons {
-    white-space: nowrap;
-}
-
-.action-buttons .btn {
-    margin-bottom: 5px;
 }
 
 /* Employee Cards */
@@ -96,6 +85,14 @@
     .employee-search-card .btn {
         width: 100%;
     }
+
+    .action-buttons {
+        white-space: nowrap;
+    }
+
+    .action-buttons .btn {
+        margin-right: 4px;
+    }
 }
 
 
@@ -104,6 +101,14 @@
 ================================ */
 
 @media (max-width: 480px) {
+
+    .action-buttons {
+        min-width: 160px;
+    }
+
+    .action-buttons .btn {
+        margin-bottom: 4px;
+    }
 
     .employee-page-title {
         font-size: 24px;
