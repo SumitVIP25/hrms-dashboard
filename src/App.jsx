@@ -4,7 +4,7 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
 const Login = lazy(() => import("./pages/Login"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
@@ -24,7 +24,7 @@ function ProtectedRoute({ children }) {
 function App() {
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Suspense fallback={<div>Loading page...</div>}>
         <Routes>
           <Route path='/' element={<Login />} />
@@ -37,7 +37,7 @@ function App() {
           <Route path='/settings' element={<ProtectedRoute><Settings /></ProtectedRoute>} />
         </Routes>
       </Suspense>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
